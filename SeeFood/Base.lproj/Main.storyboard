@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o7J-ZG-CjN">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SeeFood" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hotdogBackground" translatesAutoresizingMaskIntoConstraints="NO" id="nXh-aj-0gB" userLabel="Static Background Image">
+                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="9JV-tM-Ohg"/>
+                                    <constraint firstAttribute="height" constant="128" id="zz5-3g-ahA"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QDX-Gm-ymD" userLabel="User Selected Image">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5g1-xc-yTd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="136"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="136" id="RLo-Vb-Nzt"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FqZ-dd-d2m">
+                                <rect key="frame" x="138" y="537" width="99" height="61"/>
+                                <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="Sja-2v-6By"/>
+                                    <constraint firstAttribute="width" constant="99" id="fSn-dr-WVj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="shareButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q1K-eB-H2X"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.83529411764705885" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="QDX-Gm-ymD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="D7S-CE-flr"/>
+                            <constraint firstItem="QDX-Gm-ymD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="JvI-G1-nWD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QDX-Gm-ymD" secondAttribute="trailing" id="Ovy-Na-JJu"/>
+                            <constraint firstItem="5g1-xc-yTd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="USR-61-sWB"/>
+                            <constraint firstItem="5g1-xc-yTd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xcb-OQ-mPC"/>
+                            <constraint firstItem="nXh-aj-0gB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="al7-l5-UjF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QDX-Gm-ymD" secondAttribute="bottom" id="dwD-Te-Kv9"/>
+                            <constraint firstItem="5g1-xc-yTd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fv7-AN-FPt"/>
+                            <constraint firstItem="5g1-xc-yTd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="jkf-KC-iau"/>
+                            <constraint firstItem="FqZ-dd-d2m" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="m6M-Hm-0bd"/>
+                            <constraint firstItem="nXh-aj-0gB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nCf-Jk-05h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FqZ-dd-d2m" secondAttribute="bottom" constant="69" id="pLR-yZ-iZa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="vPx-dM-b9L">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="camera" id="JfX-ZG-X6M">
+                                <connections>
+                                    <action selector="cameraTapped:" destination="BYZ-38-t0r" id="MNP-cD-N2T"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="organize" id="Wmx-l5-5MI">
+                                <connections>
+                                    <action selector="folderTapped:" destination="BYZ-38-t0r" id="0hI-uL-00k"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="HotdogImageView" destination="5g1-xc-yTd" id="1wX-Qs-bVw"/>
+                        <outlet property="ShareButton" destination="FqZ-dd-d2m" id="SKK-8n-12T"/>
+                        <outlet property="cameraButton" destination="JfX-ZG-X6M" id="c9Q-fa-Ie1"/>
+                        <outlet property="folderButton" destination="Wmx-l5-5MI" id="LPz-XQ-cL2"/>
+                        <outlet property="imageView" destination="QDX-Gm-ymD" id="uvr-sg-Ule"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="989.60000000000002" y="-564.46776611694156"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wTt-FW-Fl8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o7J-ZG-CjN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yhi-zB-vjs">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                            <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="kR1-Rl-9ha"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ufY-Be-ORz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="-564.46776611694156"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="hotdogBackground" width="91.680000305175781" height="68.639999389648438"/>
+    </resources>
+</document>

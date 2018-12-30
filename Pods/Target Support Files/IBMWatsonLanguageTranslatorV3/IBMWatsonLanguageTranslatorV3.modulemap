@@ -1,0 +1,6 @@
+framework module LanguageTranslator {
+  umbrella header "IBMWatsonLanguageTranslatorV3-umbrella.h"
+
+  export *
+  module * { export * }
+}
