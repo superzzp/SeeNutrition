@@ -18,21 +18,71 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var HotdogImageView: UIImageView!
     @IBOutlet weak var ShareButton: UIButton!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
+    @IBOutlet weak var foodNameIndicatorText: UITextField!
+    @IBOutlet weak var foodDescriptionButtonA: UIButton!
+    @IBOutlet weak var foodDescriptionButtonB: UIButton!
+    @IBOutlet weak var foodDescriptionButtonC: UIButton!
+    
+ 
+
+    
     
     let imgPickerController = UIImagePickerController()
     let apiKey = "XPTYY50AdYRNm9yAvlejZqsJzztJ0J43EcqRc9VLGzGP"
     let version = "2018-12-27"
     var classificationResults : [String] = []
+    var foodItemResults : [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         imgPickerController.delegate = self
+        initializeDesigns()
+        
+    }
+    
+    func initializeDesigns() {
         // initialize share button and hide it, only show it after the image is selected and analyzed
         ShareButton.layer.cornerRadius = 5
         ShareButton.layer.borderWidth = 1
+        
+        foodNameIndicatorText.layer.cornerRadius = 5
+        foodNameIndicatorText.layer.borderWidth = 0
+        self.adjustUITextFieldHeight(arg: foodNameIndicatorText)
+        
+        foodDescriptionButtonA.layer.cornerRadius = 5
+        foodDescriptionButtonA.layer.borderWidth = 1
+        foodDescriptionButtonA.layer.borderColor = UIColor.white.cgColor
+        
+        foodDescriptionButtonB.layer.cornerRadius = 5
+        foodDescriptionButtonB.layer.borderWidth = 1
+        foodDescriptionButtonB.layer.borderColor = UIColor.white.cgColor
+        
+        foodDescriptionButtonC.layer.cornerRadius = 5
+        foodDescriptionButtonC.layer.borderWidth = 1
+        foodDescriptionButtonC.layer.borderColor = UIColor.white.cgColor
+        
         ShareButton.layer.borderColor = UIColor.white.cgColor
+        ShareButton.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+        foodNameIndicatorText.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+        foodDescriptionButtonA.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+        foodDescriptionButtonB.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+        foodDescriptionButtonC.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+        
         ShareButton.isHidden = true
+        foodNameIndicatorText.isHidden = true
+        foodDescriptionButtonA.isHidden = true
+        foodDescriptionButtonB.isHidden = true
+        foodDescriptionButtonC.isHidden = true
+    }
+    
+    //method to make UITextField height dynamic according to text length
+    //remove the comment, change the arg to make the function works for UITextView
+    func adjustUITextFieldHeight(arg : UITextField)
+    {
+        arg.translatesAutoresizingMaskIntoConstraints = true
+        arg.sizeToFit()
+        //arg.isScrollEnabled = false
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -40,7 +90,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             SVProgressHUD.show()
             self.cameraButton.isEnabled = false
             self.folderButton.isEnabled = false
+            self.ShareButton.isHidden = true
+            foodNameIndicatorText.isHidden = true
+            foodDescriptionButtonA.isHidden = true
+            foodDescriptionButtonB.isHidden = true
+            foodDescriptionButtonC.isHidden = true
+            //clear the results array everytime users pick an new image
             self.classificationResults = []
+            self.foodItemResults = []
             imageView.image = image
             //dismiss the imgPickerController after presented
             imgPickerController.dismiss(animated: true, completion: nil)
@@ -75,22 +132,44 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 }
                 //detect food product
                 if (self.classificationResults.contains("food") || self.classificationResults.contains("food product")) {
+                    self.assignNonFoodDescription(descriptionArray: self.classificationResults)
+                    //food detected but no suitable text description, treat as food not detected
+                    if self.foodItemResults.count <= 0 {
+                        self.setUIWhenFoodNotDetected()
+                    }
+                    print(self.foodItemResults)
                     //grand central dispatch
                     DispatchQueue.main.async {
-                        self.navigationItem.title = self.classificationResults.first
+                        self.navigationItem.title = "Food detected!"
                         self.navigationController?.navigationBar.barTintColor = UIColor.green
                         self.navigationController?.navigationBar.isTranslucent = false
                         self.HotdogImageView.image = UIImage(named: "correct")
+                        self.foodNameIndicatorText.isHidden = false
+                        
+                        if self.foodItemResults.count == 1 {
+                            self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                            self.foodDescriptionButtonA.isHidden = false
+                        }
+                        
+                        if self.foodItemResults.count == 2 {
+                            self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                            self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
+                            self.foodDescriptionButtonA.isHidden = false
+                            self.foodDescriptionButtonB.isHidden = false
+                        }
+                        
+                        if self.foodItemResults.count == 3 || self.foodItemResults.count > 3 {
+                            self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                            self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
+                            self.foodDescriptionButtonC.setTitle(self.foodItemResults[2], for: UIControl.State.normal)
+                            self.foodDescriptionButtonA.isHidden = false
+                            self.foodDescriptionButtonB.isHidden = false
+                            self.foodDescriptionButtonC.isHidden = false
+                        }
                     }
                 }else{
                     //not a food product
-                    //grand central dispatch
-                    DispatchQueue.main.async {
-                        self.navigationItem.title = "Food not detected!"
-                        self.navigationController?.navigationBar.barTintColor = UIColor.red
-                        self.navigationController?.navigationBar.isTranslucent = false
-                        self.HotdogImageView.image = UIImage(named: "error")
-                    }
+                    self.setUIWhenFoodNotDetected()
                 }
                 
             }
@@ -98,6 +177,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             print("there was an error picking the image")
         }
         
+    }
+    
+    func setUIWhenFoodNotDetected(){
+        //grand central dispatch
+        DispatchQueue.main.async {
+            self.navigationItem.title = "Food not detected!"
+            self.navigationController?.navigationBar.barTintColor = UIColor.red
+            self.navigationController?.navigationBar.isTranslucent = false
+            self.HotdogImageView.image = UIImage(named: "error")
+        }
+    }
+    
+    
+    //assign to foodItemResults the elements of the description that only contains description of food and nothing else
+    //(excluding items which contain string color, food, nutrition, plant, dish, restaurant, building
+    func assignNonFoodDescription(descriptionArray: [String]) {
+        for item in descriptionArray {
+            if (item.lowercased().range(of: "color") == nil && item.lowercased().range(of: "food") == nil && item.lowercased().range(of: "nutrition") == nil && item.lowercased().range(of: "plant") == nil && item.lowercased().range(of: "dish") == nil && item.lowercased().range(of: "restaurant") == nil && item.lowercased().range(of: "building") == nil
+            ){
+                self.foodItemResults.append(item)
+            }
+        }
     }
     
     @IBAction func folderTapped(_ sender: UIBarButtonItem) {
