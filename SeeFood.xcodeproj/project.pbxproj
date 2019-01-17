@@ -71,7 +71,7 @@
 		0B13780821D5A34F00546484 /* SeeFood */ = {
 			isa = PBXGroup;
 			children = (
-				0BBB867121E9E67A00F7B5D1 /* Supporting files */,
+				0BBB867121E9E67A00F7B5D1 /* Supporting-files */,
 				0BBB867021E9E60300F7B5D1 /* Controllers */,
 				0BBB866F21E9E5F900F7B5D1 /* Views */,
 				0BBB866E21E9E5ED00F7B5D1 /* Models */,
@@ -108,14 +108,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		0BBB867121E9E67A00F7B5D1 /* Supporting files */ = {
+		0BBB867121E9E67A00F7B5D1 /* Supporting-files */ = {
 			isa = PBXGroup;
 			children = (
 				0B13781521D5A35000546484 /* Info.plist */,
 				0BBB866C21E95D1C00F7B5D1 /* GoogleService-Info.plist */,
 				0BE4002321F092FE00922BB9 /* Constants.swift */,
 			);
-			path = "Supporting files";
+			path = "Supporting-files";
 			sourceTree = "<group>";
 		};
 		17328BE73954297D43134D0F /* Pods */ = {
