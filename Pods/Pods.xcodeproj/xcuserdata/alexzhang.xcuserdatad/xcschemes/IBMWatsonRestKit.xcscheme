@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5268404D52C2E17672BA3F8F520BD0D4"
+               BlueprintIdentifier = "D465157A7498DE09DB04690E263B7DB5"
                BuildableName = "RestKit.framework"
                BlueprintName = "IBMWatsonRestKit"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5268404D52C2E17672BA3F8F520BD0D4"
+            BlueprintIdentifier = "D465157A7498DE09DB04690E263B7DB5"
             BuildableName = "RestKit.framework"
             BlueprintName = "IBMWatsonRestKit"
             ReferencedContainer = "container:Pods.xcodeproj">

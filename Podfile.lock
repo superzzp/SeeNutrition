@@ -1,78 +1,162 @@
 PODS:
-  - IBMWatsonAssistantV1 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonAssistantV2 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonDiscoveryV1 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonLanguageTranslatorV3 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonNaturalLanguageClassifierV1 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonNaturalLanguageUnderstandingV1 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonPersonalityInsightsV3 (1.1.0):
-    - IBMWatsonRestKit (~> 2.0.0)
+  - Alamofire (4.8.0)
+  - Firebase/Core (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.4.0)
+  - Firebase/CoreOnly (5.15.0):
+    - FirebaseCore (= 5.1.10)
+  - Firebase/MLVision (5.15.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVision (= 0.13.0)
+  - FirebaseAnalytics (5.4.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.3)
+    - GoogleAppMeasurement (= 5.4.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.1.10):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.3.0):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseMLCommon (0.13.0):
+    - FirebaseCore (~> 5.1)
+  - FirebaseMLVision (0.13.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseMLCommon (~> 0.13)
+    - GoogleAPIClientForREST/Core (~> 1.3)
+    - GoogleAPIClientForREST/Vision (~> 1.3)
+    - GoogleMobileVision/Detector (~> 1.4)
+  - GoogleAPIClientForREST/Core (1.3.7):
+    - GTMSessionFetcher (>= 1.1.7)
+  - GoogleAPIClientForREST/Vision (1.3.7):
+    - GoogleAPIClientForREST/Core
+    - GTMSessionFetcher (>= 1.1.7)
+  - GoogleAppMeasurement (5.4.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleMobileVision/Detector (1.5.0):
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GTMSessionFetcher/Core (~> 1.1)
+    - Protobuf (~> 3.1)
+  - GoogleToolboxForMac/Defines (2.2.0)
+  - GoogleToolboxForMac/Logger (2.2.0):
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - "GoogleToolboxForMac/NSData+zlib (2.2.0)":
+    - GoogleToolboxForMac/Defines (= 2.2.0)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.6):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.6)
+  - GoogleUtilities/Logger (5.3.6):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.6):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.6)"
+  - GoogleUtilities/Reachability (5.3.6):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.6):
+    - GoogleUtilities/Logger
+  - GTMSessionFetcher (1.2.1):
+    - GTMSessionFetcher/Full (= 1.2.1)
+  - GTMSessionFetcher/Core (1.2.1)
+  - GTMSessionFetcher/Full (1.2.1):
+    - GTMSessionFetcher/Core (= 1.2.1)
   - IBMWatsonRestKit (2.0.0)
-  - IBMWatsonSpeechToTextV1 (1.1.0):
+  - IBMWatsonSpeechToTextV1 (1.2.0):
     - IBMWatsonRestKit (~> 2.0.0)
     - Starscream (= 3.0.5)
-  - IBMWatsonTextToSpeechV1 (1.1.0):
+  - IBMWatsonTextToSpeechV1 (1.2.0):
     - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonToneAnalyzerV3 (1.1.0):
+  - IBMWatsonToneAnalyzerV3 (1.2.0):
     - IBMWatsonRestKit (~> 2.0.0)
-  - IBMWatsonVisualRecognitionV3 (1.1.0):
+  - IBMWatsonVisualRecognitionV3 (1.2.0):
     - IBMWatsonRestKit (~> 2.0.0)
+  - nanopb (0.3.901):
+    - nanopb/decode (= 0.3.901)
+    - nanopb/encode (= 0.3.901)
+  - nanopb/decode (0.3.901)
+  - nanopb/encode (0.3.901)
+  - Protobuf (3.6.1)
   - Starscream (3.0.5)
   - SVProgressHUD (2.2.5)
+  - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - IBMWatsonAssistantV1 (~> 1.1.0)
-  - IBMWatsonAssistantV2 (~> 1.1.0)
-  - IBMWatsonDiscoveryV1 (~> 1.1.0)
-  - IBMWatsonLanguageTranslatorV3 (~> 1.1.0)
-  - IBMWatsonNaturalLanguageClassifierV1 (~> 1.1.0)
-  - IBMWatsonNaturalLanguageUnderstandingV1 (~> 1.1.0)
-  - IBMWatsonPersonalityInsightsV3 (~> 1.1.0)
-  - IBMWatsonSpeechToTextV1 (~> 1.1.0)
-  - IBMWatsonTextToSpeechV1 (~> 1.1.0)
-  - IBMWatsonToneAnalyzerV3 (~> 1.1.0)
-  - IBMWatsonVisualRecognitionV3 (~> 1.1.0)
+  - Alamofire
+  - Firebase/Core
+  - Firebase/MLVision
+  - IBMWatsonSpeechToTextV1 (~> 1.2.0)
+  - IBMWatsonTextToSpeechV1 (~> 1.2.0)
+  - IBMWatsonToneAnalyzerV3 (~> 1.2.0)
+  - IBMWatsonVisualRecognitionV3 (~> 1.2.0)
   - SVProgressHUD
+  - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - IBMWatsonAssistantV1
-    - IBMWatsonAssistantV2
-    - IBMWatsonDiscoveryV1
-    - IBMWatsonLanguageTranslatorV3
-    - IBMWatsonNaturalLanguageClassifierV1
-    - IBMWatsonNaturalLanguageUnderstandingV1
-    - IBMWatsonPersonalityInsightsV3
+    - Alamofire
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
+    - FirebaseMLCommon
+    - FirebaseMLVision
+    - GoogleAPIClientForREST
+    - GoogleAppMeasurement
+    - GoogleMobileVision
+    - GoogleToolboxForMac
+    - GoogleUtilities
+    - GTMSessionFetcher
     - IBMWatsonRestKit
     - IBMWatsonSpeechToTextV1
     - IBMWatsonTextToSpeechV1
     - IBMWatsonToneAnalyzerV3
     - IBMWatsonVisualRecognitionV3
+    - nanopb
+    - Protobuf
     - Starscream
     - SVProgressHUD
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
-  IBMWatsonAssistantV1: 90d2ce574bc9293dee3e30d3f747a532d55dffef
-  IBMWatsonAssistantV2: 69afbd9cb3d4beffac0b768d07a5fe5520ff24e1
-  IBMWatsonDiscoveryV1: 90fb814b9e79ab0008cb32c90ecfb8e589b4486b
-  IBMWatsonLanguageTranslatorV3: 6a07600c564f18841115f14be4b59c8a38157e67
-  IBMWatsonNaturalLanguageClassifierV1: 041b17413d209867261d8dded30047423e10769b
-  IBMWatsonNaturalLanguageUnderstandingV1: c0669447a65985e4c058c923e1d56a89c68323bf
-  IBMWatsonPersonalityInsightsV3: 40b9cdf33edd389ee34be75a557481c4f001bffd
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
+  FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
+  FirebaseCore: 35747502d9e8c6ee217385ad04446c7c2aaf9c5c
+  FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
+  FirebaseMLCommon: 5e1bc4c4aa1d12c1f6bc38b40d2d60e8e63466bb
+  FirebaseMLVision: eba288c56228b25d9be498861ad0b9f305e8ce5c
+  GoogleAPIClientForREST: 825503f12cb5824601cf526cf06d81a1cea4afd9
+  GoogleAppMeasurement: 98b71f5e04142793729a5ef23e5b96651ff4b70f
+  GoogleMobileVision: a1f93108b3527d67339e2de80e1db76645f9e8b9
+  GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
+  GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
+  GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   IBMWatsonRestKit: 0a8d0f2f1cc757a0231729e9206e0b774cda0997
-  IBMWatsonSpeechToTextV1: a726a739e29b231d951e4e6981e9fbe969f7342b
-  IBMWatsonTextToSpeechV1: 486ccc7b4ac3fab4c385860a39e657c747d62b1f
-  IBMWatsonToneAnalyzerV3: e280970e26137f46b2958f673eea2462124c8673
-  IBMWatsonVisualRecognitionV3: 05ce6211aad6e2e19806bf999b2c1bea1ea4d289
+  IBMWatsonSpeechToTextV1: caa5904622c803f5020af1600507cec7891be811
+  IBMWatsonTextToSpeechV1: 97eb3fd9c69dd6655032e844ea91479639b1bb49
+  IBMWatsonToneAnalyzerV3: bb59fde2f492119e61a732138788cc4e05c1d137
+  IBMWatsonVisualRecognitionV3: 38326a63ade67816814697fd8e87ad1b3770679f
+  nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: a0c233a96b3ca5bde41fb80f4cd37af211db55b4
+PODFILE CHECKSUM: 403782b4b13249bf640a8aa7802822813eabc0cf
 
 COCOAPODS: 1.5.3

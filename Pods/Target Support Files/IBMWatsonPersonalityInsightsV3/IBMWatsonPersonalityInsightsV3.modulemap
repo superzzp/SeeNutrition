@@ -1,6 +1,0 @@
-framework module PersonalityInsights {
-  umbrella header "IBMWatsonPersonalityInsightsV3-umbrella.h"
-
-  export *
-  module * { export * }
-}
