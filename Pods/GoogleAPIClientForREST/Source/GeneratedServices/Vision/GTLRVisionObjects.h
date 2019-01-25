@@ -57,6 +57,7 @@
 @class GTLRVision_GoogleCloudVisionV1p1beta1InputConfig;
 @class GTLRVision_GoogleCloudVisionV1p1beta1LocalizedObjectAnnotation;
 @class GTLRVision_GoogleCloudVisionV1p1beta1LocationInfo;
+@class GTLRVision_GoogleCloudVisionV1p1beta1NormalizedVertex;
 @class GTLRVision_GoogleCloudVisionV1p1beta1OutputConfig;
 @class GTLRVision_GoogleCloudVisionV1p1beta1Page;
 @class GTLRVision_GoogleCloudVisionV1p1beta1Paragraph;
@@ -3887,7 +3888,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_BoundingPoly *boundingBox;
 
@@ -4104,7 +4105,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon for the crop region. The coordinates of the bounding
- *  box are in the original image's scale, as returned in `ImageParams`.
+ *  box are in the original image's scale.
  */
 @property(nonatomic, strong, nullable) GTLRVision_BoundingPoly *boundingPoly;
 
@@ -4367,7 +4368,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon around the face. The coordinates of the bounding box
- *  are in the original image's scale, as returned in `ImageParams`.
+ *  are in the original image's scale.
  *  The bounding box is computed to "frame" the face in accordance with human
  *  expectations. It is based on the landmarker results.
  *  Note that one or more x and/or y coordinates may not be generated in the
@@ -4793,7 +4794,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p1beta1BoundingPoly *boundingBox;
 
@@ -4817,6 +4818,9 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  A bounding polygon for the detected image annotation.
  */
 @interface GTLRVision_GoogleCloudVisionV1p1beta1BoundingPoly : GTLRObject
+
+/** The bounding polygon normalized vertices. */
+@property(nonatomic, strong, nullable) NSArray<GTLRVision_GoogleCloudVisionV1p1beta1NormalizedVertex *> *normalizedVertices;
 
 /** The bounding polygon vertices. */
 @property(nonatomic, strong, nullable) NSArray<GTLRVision_GoogleCloudVisionV1p1beta1Vertex *> *vertices;
@@ -4858,7 +4862,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon for the crop region. The coordinates of the bounding
- *  box are in the original image's scale, as returned in `ImageParams`.
+ *  box are in the original image's scale.
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p1beta1BoundingPoly *boundingPoly;
 
@@ -5035,7 +5039,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon around the face. The coordinates of the bounding box
- *  are in the original image's scale, as returned in `ImageParams`.
+ *  are in the original image's scale.
  *  The bounding box is computed to "frame" the face in accordance with human
  *  expectations. It is based on the landmarker results.
  *  Note that one or more x and/or y coordinates may not be generated in the
@@ -5438,6 +5442,30 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 
 /**
+ *  A vertex represents a 2D point in the image.
+ *  NOTE: the normalized vertex coordinates are relative to the original image
+ *  and range from 0 to 1.
+ */
+@interface GTLRVision_GoogleCloudVisionV1p1beta1NormalizedVertex : GTLRObject
+
+/**
+ *  X coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *x;
+
+/**
+ *  Y coordinate.
+ *
+ *  Uses NSNumber of floatValue.
+ */
+@property(nonatomic, strong, nullable) NSNumber *y;
+
+@end
+
+
+/**
  *  Contains metadata for the BatchAnnotateImages operation.
  */
 @interface GTLRVision_GoogleCloudVisionV1p1beta1OperationMetadata : GTLRObject
@@ -5551,7 +5579,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p1beta1BoundingPoly *boundingBox;
 
@@ -6201,7 +6229,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p1beta1BoundingPoly *boundingBox;
 
@@ -6368,7 +6396,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p2beta1BoundingPoly *boundingBox;
 
@@ -6436,7 +6464,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon for the crop region. The coordinates of the bounding
- *  box are in the original image's scale, as returned in `ImageParams`.
+ *  box are in the original image's scale.
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p2beta1BoundingPoly *boundingPoly;
 
@@ -6613,7 +6641,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon around the face. The coordinates of the bounding box
- *  are in the original image's scale, as returned in `ImageParams`.
+ *  are in the original image's scale.
  *  The bounding box is computed to "frame" the face in accordance with human
  *  expectations. It is based on the landmarker results.
  *  Note that one or more x and/or y coordinates may not be generated in the
@@ -7153,7 +7181,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p2beta1BoundingPoly *boundingBox;
 
@@ -7803,7 +7831,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p2beta1BoundingPoly *boundingBox;
 
@@ -8012,7 +8040,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p3beta1BoundingPoly *boundingBox;
 
@@ -8080,7 +8108,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon for the crop region. The coordinates of the bounding
- *  box are in the original image's scale, as returned in `ImageParams`.
+ *  box are in the original image's scale.
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p3beta1BoundingPoly *boundingPoly;
 
@@ -8257,7 +8285,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 
 /**
  *  The bounding polygon around the face. The coordinates of the bounding box
- *  are in the original image's scale, as returned in `ImageParams`.
+ *  are in the original image's scale.
  *  The bounding box is computed to "frame" the face in accordance with human
  *  expectations. It is based on the landmarker results.
  *  Note that one or more x and/or y coordinates may not be generated in the
@@ -8820,7 +8848,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p3beta1BoundingPoly *boundingBox;
 
@@ -9505,7 +9533,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_GoogleCloudVisionV1p3beta1BoundingPoly *boundingBox;
 
@@ -10333,7 +10361,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_BoundingPoly *boundingBox;
 
@@ -10517,7 +10545,8 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
 /**
  *  Output only. The time at which this ProductSet was last indexed. Query
  *  results will reflect all updates before this time. If this ProductSet has
- *  never been indexed, this field is 0.
+ *  never been indexed, this timestamp is the default value
+ *  "1970-01-01T00:00:00Z".
  *  This field is ignored when creating a ProductSet.
  */
 @property(nonatomic, strong, nullable) GTLRDateTime *indexTime;
@@ -11099,7 +11128,7 @@ GTLR_EXTERN NSString * const kGTLRVision_SafeSearchAnnotation_Violence_VeryUnlik
  *  2----3
  *  | |
  *  1----0
- *  and the vertice order will still be (0, 1, 2, 3).
+ *  and the vertex order will still be (0, 1, 2, 3).
  */
 @property(nonatomic, strong, nullable) GTLRVision_BoundingPoly *boundingBox;
 

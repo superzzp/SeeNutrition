@@ -15,6 +15,10 @@ target 'SeeFood' do
   pod 'SwiftyJSON'
   pod 'Firebase/Core'
   pod 'Firebase/MLVision'
+  pod 'Firebase/Auth'
+  pod 'FirebaseUI/Auth'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
 
 
 end

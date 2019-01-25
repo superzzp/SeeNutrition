@@ -1,4 +1,5 @@
 framework module FirebaseMLCommon {
+  umbrella header "FirebaseMLCommon.h"
   export *
   module * { export *}
   link "sqlite3"

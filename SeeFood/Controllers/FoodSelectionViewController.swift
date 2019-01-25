@@ -36,8 +36,8 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
 
     
     //ID, keys, url and default timezone for Nutritionix api
-    let nuixAppID = NUIXAPPID
-    let nuixAppKeys = NUIXAPPKEYS
+    let nuixAppID = Constants.NUIX.NUIXAPPID
+    let nuixAppKeys = Constants.NUIX.NUIXAPPKEYS
     let nuixURL =  "https://trackapi.nutritionix.com/v2/natural/nutrients"
     let nuixTimezone = "US/Eastern"
     
@@ -139,12 +139,13 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         options.maxResults = 10
         
         //get an instance of imageDetector
-        let labelDetector = Vision.vision().cloudLabelDetector()
+        
+        let labelDetector = Vision.vision().cloudImageLabeler()
         
         //convert UIImage to VisionImage
         let image: VisionImage = VisionImage(image: image)
         
-        labelDetector.detect(in: image) { labels, error in
+        labelDetector.process(image) { labels, error in
             guard error == nil, let labels = labels, !labels.isEmpty else {
                 print(error)
                 print("fail to classify the image!")
@@ -155,8 +156,8 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             // START_EXCLUDE
             print("================classification results ===================")
             for label in labels {
-                let labelText = label.label!
-                let entityId = label.entityId!
+                let labelText = label.text
+                let entityId = label.entityID!
                 let confidence = label.confidence!
                 print ("label: \(labelText), confidence: \(confidence)")
                 
@@ -175,8 +176,40 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             }
             
             self.checkFoodAndSetUI();
-            
         }
+//        labelDetector.detect(in: image) { labels, error in
+//            guard error == nil, let labels = labels, !labels.isEmpty else {
+//                print(error)
+//                print("fail to classify the image!")
+//                return
+//            }
+//
+//            // Labeled image
+//            // START_EXCLUDE
+//            print("================classification results ===================")
+//            for label in labels {
+//                let labelText = label.label!
+//                let entityId = label.entityId!
+//                let confidence = label.confidence!
+//                print ("label: \(labelText), confidence: \(confidence)")
+//
+//                //append all names of classification results to a global list
+//                self.classificationResults.append(labelText)
+//            }
+//            print("================end of classification results ====================")
+//
+//            //grand central dispatch
+//            //enable camera, folder button and activate share Button
+//            DispatchQueue.main.async {
+//                self.cameraButton.isEnabled = true
+//                self.folderButton.isEnabled = true
+//                self.ShareButton.isHidden = false
+//                SVProgressHUD.dismiss()
+//            }
+//
+//            self.checkFoodAndSetUI();
+//            
+//        }
         
     }
     //check if a array of strings contain food item

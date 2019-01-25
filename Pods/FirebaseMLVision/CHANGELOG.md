@@ -1,3 +1,6 @@
+# 2019-01-22 -- v0.14.0
+- (breaking change) Unified and enhanced on-device and cloud image labeling API.
+
 # 2018-11-20 -- v0.13.0
 - Face contour detection will only return contours for the most prominent face.
 - The face tracking feature is disabled for contour-only detection in `.fast` mode.
