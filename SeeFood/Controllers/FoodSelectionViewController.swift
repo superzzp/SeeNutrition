@@ -234,7 +234,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             //grand central dispatch
             DispatchQueue.main.async {
                 self.navigationItem.title = "Food detected!"
-                self.navigationController?.navigationBar.barTintColor = UIColor.green
+                self.navigationController?.navigationBar.barTintColor = UIColor.init(displayP3Red: 60.0/255, green:179.0/255 , blue: 113.0/255, alpha: 1)
                 self.navigationController?.navigationBar.isTranslucent = false
                 self.HotdogImageView.image = UIImage(named: "correct")
                 self.foodNameIndicatorText.isHidden = false

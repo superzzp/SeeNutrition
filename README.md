@@ -1,10 +1,10 @@
 # SeeFood
 <p align = "middle">
     <img src="Documentation/login.png" alt="login page" width="350"/>
-    <img src="Documentation/sandwich1.png" alt="sandwich1" width="350"/>
-    <img src="Documentation/sandwich2.png" alt="sandwich2" width="350"/>
     <img src="Documentation/chicken1.png" alt="chicken1" width="350"/>
     <img src="Documentation/chicken2.png" alt="chicken2" width="350"/>
+    <img src="Documentation/sandwich1.png" alt="spaghetti1" width="350"/>
+    <img src="Documentation/sandwich2.png" alt="spaghetti2" width="350"/>
     <img src="Documentation/salad1.png" alt="salad1" width="350"/>
     <img src="Documentation/salad2.png" alt="salad2" width="350"/>
 </p>
