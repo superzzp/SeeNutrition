@@ -1,6 +1,0 @@
-framework module VisualRecognition {
-  umbrella header "IBMWatsonVisualRecognitionV3-umbrella.h"
-
-  export *
-  module * { export * }
-}

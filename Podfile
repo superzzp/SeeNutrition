@@ -6,10 +6,6 @@ target 'SeeFood' do
   use_frameworks!
 
   # Pods for SeeFood
-  pod 'IBMWatsonSpeechToTextV1', '~> 1.2.0'
-  pod 'IBMWatsonTextToSpeechV1', '~> 1.2.0'
-  pod 'IBMWatsonToneAnalyzerV3', '~> 1.2.0'
-  pod 'IBMWatsonVisualRecognitionV3', '~> 1.2.0'
   pod 'SVProgressHUD'
   pod 'Alamofire'
   pod 'SwiftyJSON'
@@ -19,6 +15,6 @@ target 'SeeFood' do
   pod 'FirebaseUI/Auth'
   pod 'Firebase/Database'
   pod 'Firebase/Storage'
-
+  pod 'Firebase/RemoteConfig'
 
 end
