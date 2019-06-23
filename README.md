@@ -14,3 +14,4 @@ SeeNutrition is a machine learning food app. Inspired by the classic app from th
 It utilizes Google's image regnition services and its pre-trained neural net, and gets the nutrition data from Nutritionix api. It uses Firebase as backend for user registration and login.</br>
 
 Download on App Store today!
+
