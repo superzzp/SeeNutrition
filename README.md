@@ -11,7 +11,7 @@
 
 SeeNutrition is a machine learning food app. Inspired by the classic app from the TV show Silicon Valley, It can not only classify "hotdog and not hotdog", but also find out the name of food in the photo you take, and display its nutrition information. </br>
 
-It utilizes Google's image regnition services and its pre-trained neural net, and gets the nutrition data from Nutritionix api. It uses Firebase as backend for user registration and login.</br>
+It utilizes Google's image regnition services and its pre-trained neural net, and gets the nutrition data from Nutritionix api. It also uses Firebase as backend for user registration and login.</br>
 
 Download on App Store today!
 
