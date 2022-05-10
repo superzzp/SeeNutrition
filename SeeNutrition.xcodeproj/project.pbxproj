@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,7 +24,7 @@
 		0BE4002421F092FE00922BB9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE4002321F092FE00922BB9 /* Constants.swift */; };
 		52F1C5E3224CB16F007A4EF3 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1C5E2224CB16E007A4EF3 /* UIViewExtensions.swift */; };
 		52F1C5E5224CBD19007A4EF3 /* KeyValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F1C5E4224CBD19007A4EF3 /* KeyValues.swift */; };
-		6E18C99E1ECD5CFAAF6540FF /* Pods_SeeFood.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D64BBADBB4DAC2D6F9D7E84 /* Pods_SeeFood.framework */; };
+		EE706A1C86990BCAF7E1664C /* Pods_SeeNutrition.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FB94AF6DBA9C468A5E37ED /* Pods_SeeNutrition.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,11 +45,11 @@
 		0B23CAE721FAAB88006FE8A2 /* Storyboard+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Storyboard+Utility.swift"; sourceTree = "<group>"; };
 		0BBB866C21E95D1C00F7B5D1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0BE4002321F092FE00922BB9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		0D64BBADBB4DAC2D6F9D7E84 /* Pods_SeeFood.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeFood.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F1C5E2224CB16E007A4EF3 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		52F1C5E4224CBD19007A4EF3 /* KeyValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValues.swift; sourceTree = "<group>"; };
-		6515BB081970E168E1E33AFD /* Pods-SeeFood.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.release.xcconfig"; sourceTree = "<group>"; };
-		CEE9D8FE0268AF426117177F /* Pods-SeeFood.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeFood.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood.debug.xcconfig"; sourceTree = "<group>"; };
+		A7FB94AF6DBA9C468A5E37ED /* Pods_SeeNutrition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeeNutrition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDEA9558EEDD60728F7A27D2 /* Pods-SeeNutrition.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeNutrition.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition.debug.xcconfig"; sourceTree = "<group>"; };
+		FE61377C381D11A2386C4BFD /* Pods-SeeNutrition.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeeNutrition.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E18C99E1ECD5CFAAF6540FF /* Pods_SeeFood.framework in Frameworks */,
+				EE706A1C86990BCAF7E1664C /* Pods_SeeNutrition.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,8 +158,8 @@
 		17328BE73954297D43134D0F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				CEE9D8FE0268AF426117177F /* Pods-SeeFood.debug.xcconfig */,
-				6515BB081970E168E1E33AFD /* Pods-SeeFood.release.xcconfig */,
+				BDEA9558EEDD60728F7A27D2 /* Pods-SeeNutrition.debug.xcconfig */,
+				FE61377C381D11A2386C4BFD /* Pods-SeeNutrition.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -167,7 +167,7 @@
 		ADB87B6B74F73E83849F82AC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0D64BBADBB4DAC2D6F9D7E84 /* Pods_SeeFood.framework */,
+				A7FB94AF6DBA9C468A5E37ED /* Pods_SeeNutrition.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Alex Zhang";
 				TargetAttributes = {
 					0B13780521D5A34F00546484 = {
@@ -250,38 +250,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7894CB8675C056D0C937663C /* [CP] Check Pods Manifest.lock */ = {
@@ -299,7 +276,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SeeFood-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SeeNutrition-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -312,20 +289,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeeFood/Pods-SeeFood-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeeNutrition/Pods-SeeNutrition-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -390,6 +362,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -451,6 +424,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -482,7 +456,7 @@
 		};
 		0B13781921D5A35000546484 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CEE9D8FE0268AF426117177F /* Pods-SeeFood.debug.xcconfig */;
+			baseConfigurationReference = BDEA9558EEDD60728F7A27D2 /* Pods-SeeNutrition.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -501,7 +475,7 @@
 		};
 		0B13781A21D5A35000546484 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6515BB081970E168E1E33AFD /* Pods-SeeFood.release.xcconfig */;
+			baseConfigurationReference = FE61377C381D11A2386C4BFD /* Pods-SeeNutrition.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

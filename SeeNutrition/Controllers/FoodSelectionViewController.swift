@@ -26,8 +26,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     @IBOutlet weak var foodDescriptionButtonB: UIButton!
     @IBOutlet weak var foodDescriptionButtonC: UIButton!
 
- 
-    
     let imgPickerController = UIImagePickerController()
     var nutritionDataModel = NutritionData()
 

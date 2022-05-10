@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o7J-ZG-CjN">
-    <device id="ipad12_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="o7J-ZG-CjN">
+    <device id="ipad12_9" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -196,7 +194,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLP-wP-a8F">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLP-wP-a8F">
                                 <rect key="frame" x="377" y="360" width="269" height="48"/>
                                 <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -260,7 +258,7 @@
                                     <action selector="foodDescriptionBPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="698-g7-06d"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVQ-sV-BO8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVQ-sV-BO8">
                                 <rect key="frame" x="378" y="296" width="268" height="48"/>
                                 <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -311,7 +309,7 @@
                                     <action selector="foodDescriptionAPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wOv-JG-fSV"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9i-Jn-spq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R9i-Jn-spq">
                                 <rect key="frame" x="377" y="426" width="270" height="48"/>
                                 <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -366,6 +364,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="nXh-aj-0gB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="1GV-Ci-IlO"/>
@@ -449,7 +448,6 @@
                             <constraint firstItem="5g1-xc-yTd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ymp-iv-flR"/>
                             <constraint firstItem="nXh-aj-0gB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z7q-C7-ak1"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="24d-tK-Dmd"/>
@@ -478,14 +476,6 @@
                                 <exclude reference="fMu-V4-E8e"/>
                                 <exclude reference="mCq-sY-68e"/>
                                 <exclude reference="ymp-iv-flR"/>
-                                <exclude reference="1GV-Ci-IlO"/>
-                                <exclude reference="R5J-rq-ADH"/>
-                                <exclude reference="We1-Gw-G9e"/>
-                                <exclude reference="XiJ-hy-H8N"/>
-                                <exclude reference="f0X-uo-hIG"/>
-                                <exclude reference="fp7-6I-I6w"/>
-                                <exclude reference="vS3-5G-zVo"/>
-                                <exclude reference="z7q-C7-ak1"/>
                                 <exclude reference="2eG-bP-u48"/>
                                 <exclude reference="A9c-jb-ACj"/>
                                 <exclude reference="KoK-Km-Pyw"/>
@@ -526,6 +516,14 @@
                                 <exclude reference="nPx-2e-GtI"/>
                                 <exclude reference="s9e-fg-h9R"/>
                                 <exclude reference="taP-7Y-aRd"/>
+                                <exclude reference="1GV-Ci-IlO"/>
+                                <exclude reference="R5J-rq-ADH"/>
+                                <exclude reference="We1-Gw-G9e"/>
+                                <exclude reference="XiJ-hy-H8N"/>
+                                <exclude reference="f0X-uo-hIG"/>
+                                <exclude reference="fp7-6I-I6w"/>
+                                <exclude reference="vS3-5G-zVo"/>
+                                <exclude reference="z7q-C7-ak1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
@@ -536,8 +534,6 @@
                                 <include reference="vIg-0A-Lcj"/>
                                 <include reference="RWO-2x-Tc6"/>
                                 <include reference="ymp-iv-flR"/>
-                                <include reference="R5J-rq-ADH"/>
-                                <include reference="z7q-C7-ak1"/>
                                 <include reference="2eG-bP-u48"/>
                                 <include reference="mSO-RH-G4K"/>
                                 <include reference="HxB-mD-55B"/>
@@ -550,6 +546,8 @@
                                 <include reference="FbD-c7-e5n"/>
                                 <include reference="YBM-aw-rLn"/>
                                 <include reference="nPx-2e-GtI"/>
+                                <include reference="R5J-rq-ADH"/>
+                                <include reference="z7q-C7-ak1"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -560,8 +558,6 @@
                                 <include reference="qYx-7k-vwb"/>
                                 <include reference="Yhj-F3-cxl"/>
                                 <include reference="mCq-sY-68e"/>
-                                <include reference="We1-Gw-G9e"/>
-                                <include reference="f0X-uo-hIG"/>
                                 <include reference="L1F-bY-J8X"/>
                                 <include reference="RSM-AQ-sXR"/>
                                 <include reference="Qa8-Bf-OvF"/>
@@ -574,6 +570,8 @@
                                 <include reference="8Ej-2k-KU8"/>
                                 <include reference="s9e-fg-h9R"/>
                                 <include reference="taP-7Y-aRd"/>
+                                <include reference="We1-Gw-G9e"/>
+                                <include reference="f0X-uo-hIG"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -585,8 +583,6 @@
                                 <include reference="IUM-zK-TNS"/>
                                 <include reference="cEX-QK-cdn"/>
                                 <include reference="fMu-V4-E8e"/>
-                                <include reference="fp7-6I-I6w"/>
-                                <include reference="vS3-5G-zVo"/>
                                 <include reference="A9c-jb-ACj"/>
                                 <include reference="KoK-Km-Pyw"/>
                                 <include reference="Mjo-xL-waT"/>
@@ -595,6 +591,8 @@
                                 <include reference="mqr-uf-dLn"/>
                                 <include reference="Vvj-9h-0Di"/>
                                 <include reference="gqA-to-fbO"/>
+                                <include reference="fp7-6I-I6w"/>
+                                <include reference="vS3-5G-zVo"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -606,8 +604,6 @@
                                 <include reference="tjI-Gf-icm"/>
                                 <include reference="435-iD-eE6"/>
                                 <include reference="byz-ze-yxc"/>
-                                <include reference="1GV-Ci-IlO"/>
-                                <include reference="XiJ-hy-H8N"/>
                                 <include reference="elE-63-9SK"/>
                                 <include reference="o0m-75-Gcc"/>
                                 <include reference="EfI-ze-DmI"/>
@@ -616,6 +612,8 @@
                                 <include reference="EOP-UA-yzU"/>
                                 <include reference="3PX-7V-QOi"/>
                                 <include reference="BGi-rV-5pO"/>
+                                <include reference="1GV-Ci-IlO"/>
+                                <include reference="XiJ-hy-H8N"/>
                             </mask>
                         </variation>
                     </view>
@@ -751,6 +749,7 @@
                                 </variation>
                             </textView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="jca-hb-8Mq"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Umi-9C-9te" firstAttribute="centerY" secondItem="Lqn-cr-fZp" secondAttribute="centerY" id="020-wt-6L4"/>
@@ -774,7 +773,6 @@
                             <constraint firstItem="Umi-9C-9te" firstAttribute="centerY" secondItem="Lqn-cr-fZp" secondAttribute="centerY" id="ndt-ya-L5G"/>
                             <constraint firstItem="fvw-A0-RvT" firstAttribute="top" secondItem="Lqn-cr-fZp" secondAttribute="top" id="ylC-Nx-HY3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="jca-hb-8Mq"/>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="1rA-fx-bCh"/>
@@ -865,6 +863,6 @@
     </scenes>
     <resources>
         <image name="food-background" width="366" height="550"/>
-        <image name="hotdogBackground" width="91.680000305175781" height="68.639999389648438"/>
+        <image name="hotdogBackground" width="191" height="143"/>
     </resources>
 </document>
