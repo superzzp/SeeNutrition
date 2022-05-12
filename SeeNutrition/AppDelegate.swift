@@ -3,7 +3,7 @@
 //  SeeNutrition
 //
 //  Created by Alex Zhang on 2018-12-27.
-//  Copyright © 2018 Alex Zhang. All rights reserved.
+//  Copyright © 2022 Alex Zhang. All rights reserved.
 //
 
 import UIKit

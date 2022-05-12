@@ -3,7 +3,7 @@
 //  SeeNutrition
 //
 //  Created by Alex Zhang on 2018-12-27.
-//  Copyright © 2018 Alex Zhang. All rights reserved.
+//  Copyright © 2022 Alex Zhang. All rights reserved.
 //
 
 import UIKit
@@ -29,18 +29,17 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     let imgPickerController = UIImagePickerController()
     var nutritionDataModel = NutritionData()
 
-    
     //ID, keys, url and default timezone for Nutritionix api
-//    let nuixAppID = KeyValues.sharedInstance.string(forKey: .nuixAppId)
-//    let nuixAppKeys = KeyValues.sharedInstance.string(forKey: .nuixAppKeys)
-    let nuixAppID = Constants.NUIX.nuixAppId
-    let nuixAppKeys = Constants.NUIX.nuixAppKeys
-    let nuixURL =  Constants.NUIX.nuixURL
-    let nuixTimezone = Constants.NUIX.nuixTimeZone
+    //  let nuixAppID = KeyValues.sharedInstance.string(forKey: .nuixAppId)
+    //  let nuixAppKeys = KeyValues.sharedInstance.string(forKey: .nuixAppKeys)
+    let nuixAppID : String = Constants.NUIX.nuixAppId
+    let nuixAppKeys : String = Constants.NUIX.nuixAppKeys
+    let nuixURL : String =  Constants.NUIX.nuixURL
+    let nuixTimezone : String = Constants.NUIX.nuixTimeZone
     
     var classificationResults : [String] = []
     var foodItemResults : [String] = []
-    var currentPickedFoodItem: String = ""
+    var currentPickedFoodItem : String = ""
     
 
     override func viewDidLoad() {
@@ -52,13 +51,9 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     }
     
     func initializeDesigns() {
-        // initialize share button and hide it, only show it after the image is selected and analyzed
-        //ShareButton.layer.cornerRadius = 5
-        //ShareButton.layer.borderWidth = 1
-        
+       
         foodNameIndicatorText.layer.cornerRadius = 5
         foodNameIndicatorText.layer.borderWidth = 0
-        //self.adjustUITextFieldHeight(arg: foodNameIndicatorText)
         
         foodDescriptionButtonA.layer.cornerRadius = 5
         foodDescriptionButtonA.layer.borderWidth = 1
@@ -72,21 +67,15 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         foodDescriptionButtonC.layer.borderWidth = 1
         foodDescriptionButtonC.layer.borderColor = UIColor.white.cgColor
         
-        //ShareButton.layer.borderColor = UIColor.white.cgColor
-        //ShareButton.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
         foodNameIndicatorText.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
         foodDescriptionButtonA.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
         foodDescriptionButtonB.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
         foodDescriptionButtonC.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
         
-        //ShareButton.isHidden = true
         foodNameIndicatorText.isHidden = true
         foodDescriptionButtonA.isHidden = true
         foodDescriptionButtonB.isHidden = true
         foodDescriptionButtonC.isHidden = true
-        print("================NUIX========================")
-        print(nuixAppID)
-        print(nuixAppKeys)
     }
     
     //method to make UITextField height dynamic according to text length
@@ -95,44 +84,9 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     {
         arg.translatesAutoresizingMaskIntoConstraints = true
         arg.sizeToFit()
-        //arg.isScrollEnabled = false
     }
-// Watson image recognition currently not working, return error 400, use Google image recognition instead
     
-//    func runWatsonVisualRecognition(image:UIImage) {
-//        let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
-//        visualRecognition.classify(image: image, threshold: 0.0, owners: ["default"], classifierIDs: ["food"], acceptLanguage: "en") { response, error in
-//            if let error = error {
-//                print("============================here is error =========================================")
-//                print(error)
-//                print("============================end of error =========================================")
-//            }
-//            guard let classifiedImages = response?.result else {
-//                print("Failed to classify the image")
-//                return
-//            }
-//            print(classifiedImages)
-//            //check sample response at https://cloud.ibm.com/apidocs/visual-recognition?language=node#data-handling for details
-//            let classes = classifiedImages.images.first!.classifiers.first!.classes
-//            //append the classification results back to the global index classificationResults
-//            for index in 0 ..< classes.count {
-//
-//                self.classificationResults.append(classes[index].className)
-//            }
-//            print(self.classificationResults)
-//            //grand central dispatch
-//            DispatchQueue.main.async {
-//                self.cameraButton.isEnabled = true
-//                self.folderButton.isEnabled = true
-//                SVProgressHUD.dismiss()
-//                self.ShareButton.isHidden = false
-//            }
-//            self.checkFoodAndSetUI();
-//        }
-//    }
-    
-    
-    //Cloud base image detection, use with care
+    //Cloud base image detection
     func runGoogleMLVisualRecognition(image: UIImage) {
         //configuration
         let options = VisionCloudDetectorOptions()
@@ -147,7 +101,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         
         labelDetector.process(image) { labels, error in
             guard error == nil, let labels = labels, !labels.isEmpty else {
-                print(error)
+                print(error!)
                 print("fail to classify the image!")
                 return
             }
@@ -157,7 +111,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             print("================classification results ===================")
             for label in labels {
                 let labelText = label.text
-                let entityId = label.entityID!
                 let confidence = label.confidence!
                 print ("label: \(labelText), confidence: \(confidence)")
                 
@@ -167,51 +120,16 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             print("================end of classification results ====================")
             
             //grand central dispatch
-            //enable camera, folder button and activate share Button
+            //enable camera, folder button
             DispatchQueue.main.async {
                 self.cameraButton.isEnabled = true
                 self.folderButton.isEnabled = true
-                //self.ShareButton.isHidden = false
                 SVProgressHUD.dismiss()
             }
-            
             self.checkFoodAndSetUI();
         }
-//        labelDetector.detect(in: image) { labels, error in
-//            guard error == nil, let labels = labels, !labels.isEmpty else {
-//                print(error)
-//                print("fail to classify the image!")
-//                return
-//            }
-//
-//            // Labeled image
-//            // START_EXCLUDE
-//            print("================classification results ===================")
-//            for label in labels {
-//                let labelText = label.label!
-//                let entityId = label.entityId!
-//                let confidence = label.confidence!
-//                print ("label: \(labelText), confidence: \(confidence)")
-//
-//                //append all names of classification results to a global list
-//                self.classificationResults.append(labelText)
-//            }
-//            print("================end of classification results ====================")
-//
-//            //grand central dispatch
-//            //enable camera, folder button and activate share Button
-//            DispatchQueue.main.async {
-//                self.cameraButton.isEnabled = true
-//                self.folderButton.isEnabled = true
-//                self.ShareButton.isHidden = false
-//                SVProgressHUD.dismiss()
-//            }
-//
-//            self.checkFoodAndSetUI();
-//            
-//        }
-        
     }
+    
     //check if a array of strings contain food item
     func checkFood(array: [String]) -> Bool{
         for item in array {
@@ -271,7 +189,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             SVProgressHUD.show()
             self.cameraButton.isEnabled = false
             self.folderButton.isEnabled = false
-            //self.ShareButton.isHidden = true
             self.foodNameIndicatorText.isHidden = true
             self.foodDescriptionButtonA.isHidden = true
             self.foodDescriptionButtonB.isHidden = true
@@ -287,7 +204,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             //runWatsonVisualRecognition(image: image)
             
             runGoogleMLVisualRecognition(image: image)
-            
             
         }else{
             print("there was an error picking the image")
@@ -363,20 +279,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         }
 
     }
-    
-    
-
-//    @IBAction func shareButtonPressed(_ sender: UIButton) {
-//        if SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter) {
-//            let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-//            vc?.setInitialText("My food is \(navigationItem.title)")
-//            vc?.add(imageView.image)
-//            present(vc!, animated: true, completion: nil)
-//        }else{
-//            navigationItem.title = "please install twitter"
-//        }
-//    }
-//
 
     @IBAction func cameraTapped(_ sender: UIBarButtonItem) {
         //tap into camera
@@ -405,15 +307,12 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     @IBAction func foodDescriptionAPressed(_ sender: UIButton) {
         currentPickedFoodItem = foodDescriptionButtonA.currentTitle!
         getNutritionData()
-
-
     }
 
 
     @IBAction func foodDescriptionBPressed(_ sender: UIButton) {
         currentPickedFoodItem = foodDescriptionButtonB.currentTitle!
         getNutritionData()
-        
     }
 
     @IBAction func foodDescriptionCPressed(_ sender: UIButton) {
@@ -451,48 +350,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             }
         }
     }
-    
-//    func getNutritionData() {
-////        let headers: HTTPHeaders = [
-////            "x-app-id" : nuixAppID,
-////            "x-app-key": nuixAppKeys
-////        ]
-//
-//        let parameters: Parameters = [
-//            "app_id"  :
-//            "app_key" :
-//            "nutrition-type" : "logging",
-//            "ingr" : "apple"
-//            //"ingr" : currentPickedFoodItem,
-//        ]
-//
-//
-//
-//        Alamofire.request(edaURL, method: .get, parameters: parameters, encoding: URLEncoding.default).responseJSON { response in
-//            if response.result.isSuccess {
-//                print("successfully get JSON data!")
-//                let jso: JSON = JSON(response.result.value!)
-//                print("===================print out json=======================")
-//                print(jso)
-//
-////                self.updateNutritionData(json: jso)
-////                print("================================line 416====================")
-////                print(self.nutritionDataModel.food_name)
-////                self.performSegue(withIdentifier: "toFoodDataViewController", sender:UIViewController.self)
-//
-//
-//            }else{
-//                print(response.description)
-//                print(response.debugDescription)
-//                print("fail to get JSON response!")
-//                DispatchQueue.main.async {
-//                    self.navigationItem.title = "Fail to get nutrition infomation"
-//                }
-//            }
-//        }
-//    }
 
-    
     func updateNutritionData(json: JSON) {
         self.nutritionDataModel.food_name = json["foods"][0]["food_name"].stringValue
         self.nutritionDataModel.brand_name = json["foods"][0]["brand_name"].stringValue
@@ -530,15 +388,10 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "toFoodDataViewController") {
-            print("find seggg!!!!!!!!!!!!!!!!!")
             let destinationVC = segue.destination as! FoodDataViewController
             destinationVC.nutritionD = nutritionDataModel
-            print("set seggg!!!!!!!!!!!!!!!!!")
-
         }
-        
     }
-    
     
 }
 

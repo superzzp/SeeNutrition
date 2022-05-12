@@ -2,8 +2,8 @@
 //  UIViewExtensions.swift
 //  SeeNutrition
 //
-//  Created by test on 2019-03-28.
-//  Copyright © 2019 Alex Zhang. All rights reserved.
+//  Created by Alex Zhang on 2019-03-28.
+//  Copyright © 2022 Alex Zhang. All rights reserved.
 //
 import UIKit
 

@@ -3,7 +3,7 @@
 //  SeeNutrition
 //
 //  Created by Alex Zhang on 2019-01-24.
-//  Copyright © 2019 Alex Zhang. All rights reserved.
+//  Copyright © 2022 Alex Zhang. All rights reserved.
 //
 
 import Foundation
@@ -40,7 +40,6 @@ class LoginViewController: UIViewController, FUIAuthDelegate
     func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
         if(error != nil) {
             print(error.debugDescription)
-            print(error?.localizedDescription)
             print("User cancel login or error with login!")
         }else{
             print("Signup / Login successful!")
@@ -86,8 +85,6 @@ class LoginViewController: UIViewController, FUIAuthDelegate
                 print("email is invalid!")
                 self.showToast(message: "email is invalid!")
                 print(error.debugDescription)
-                print("===============================")
-                print(error?.localizedDescription)
             }else{
                 print("email is sent! Please verify your email!")
                 self.showToast(message: "Please verify your email and login again!")
