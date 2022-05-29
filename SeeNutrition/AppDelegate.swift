@@ -7,17 +7,22 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Configure Firebase auth and storage.
         FirebaseApp.configure()
-        let _ = KeyValues.sharedInstance
+        // Configure users and initial view.
         configureInitialRootViewController(for: window)
         return true
     }
@@ -44,28 +49,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    //Setting the initialViewController to window, and also get the default user from System if the user previously logged in
+    // Helper function, setting the initialViewController to window, and also get the default user from System if the user previously logged in
     func configureInitialRootViewController(for window: UIWindow?) {
-        
-        do {
-            print("logout when setup!")
-            try Auth.auth().signOut()
-        } catch let err {
-            print(err)
-        }
-        
+
         let defaults = UserDefaults.standard
         let initialViewController: UIViewController
-        
+    
         if let _ = Auth.auth().currentUser,
-            let userData = defaults.object(forKey: Constants.UserDefaults.currentUser) as? Data,
-            let user = try? JSONDecoder().decode(User.self, from: userData) {
+        let userData = defaults.object(forKey: Constants.UserDefaults.currentUser) as? Data,
+        let user = try? JSONDecoder().decode(User.self, from: userData)
+        {   // If users is logged in and is in UserDefault
+            // Set current user to singleton, but no need to set to UserDefault
             User.setCurrent(user)
             initialViewController = UIStoryboard.initialViewController(for: .main)
         } else {
+            // If user is not logged in
             initialViewController = UIStoryboard.initialViewController(for: .login)
         }
-        
         window?.rootViewController = initialViewController
         window?.makeKeyAndVisible()
     }

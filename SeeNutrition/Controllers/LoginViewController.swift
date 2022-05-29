@@ -1,96 +1,121 @@
 //
-//  LoginViewController.swift
+//  LoginUserPwdViewController.swift
 //  SeeNutrition
 //
-//  Created by Alex Zhang on 2019-01-24.
+//  Created by Alex Zhang on 2022-05-27.
 //  Copyright © 2022 Alex Zhang. All rights reserved.
 //
 
-import Foundation
 import UIKit
 import FirebaseAuth
-import FirebaseUI
-import FirebaseDatabase
 
-//pre-emptively solved namespace conflict between SeeNutrition.User and FirebaseAuth.User by using type alias FIRUser
-typealias FIRUser = FirebaseAuth.User
-
-class LoginViewController: UIViewController, FUIAuthDelegate
-{
-
+class LoginViewController: UIViewController {
     
-    @IBOutlet weak var LoginButton: UIButton!
+    @IBOutlet weak var emailTextField: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var loginButton: UIButton!
+    
+    @IBOutlet weak var errorLabel: UILabel!
+    
+    @IBAction func loginTapped(_ sender: UIButton) {
         
-    }
-    
-    @IBAction func loginButtonTapped(_ sender: UIButton) {
-        print("the login button is tapped!!!")
-        let authUI = FUIAuth.defaultAuthUI()
-        authUI?.delegate = self
-        let authViewController = authUI?.authViewController()
-        present(authViewController!, animated: true) {
-            print("FirebaseUI Presented!")
-        }
-    }
-    
-    func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-        if(error != nil) {
-            print(error.debugDescription)
-            print("User cancel login or error with login!")
-        }else{
-            print("Signup / Login successful!")
-        }
-        
-        //get a FIRUser instance
-        guard let user: FIRUser = authDataResult?.user
-            else{
-                return
-        }
-        
-        UserService.show(forUID: user.uid) { user in
-            if let user = user {
-                //if snapshot return an existing user info, User init successfully and user != nil
-                //call singlton to set user and also set user to system default
-                User.setCurrent(user, writeToUserDefaults: true);
-                print("Welcome back, \(user.username)")
-                let initialViewController = UIStoryboard.initialViewController(for: .main)
-                self.view.window?.rootViewController = initialViewController
-                self.view.window?.makeKeyAndVisible()
-            }else{
-                //if there is no existing user info in snapshot
-                //if the current user has verified the email, ask user to create a username and register the user there
-                if((authDataResult?.user)!.isEmailVerified == true) {
-                    self.performSegue(withIdentifier: Constants.Segue.toCreateUsername, sender: self)
-                }else{
-                    //if the user haven't verified the email, sent an verification to user
-                    self.emailVerification(firUser: (authDataResult?.user)!)
-                    do {
-                        try Auth.auth().signOut()
-                        self.dismiss(animated: true, completion: nil)
-                    } catch let err {
-                        print(err)
+        // Validate Text Fields
+        if let error = validateFields() {
+            showError(error)
+        } else {
+            // Create clean version of the text fields
+            let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            // Signing in the users
+            Auth.auth().signIn(withEmail: email, password: password) { result, error in
+                if let err = error {
+                    self.errorLabel.text = err.localizedDescription
+                    self.errorLabel.alpha = 1
+                } else {
+                    StorageServices.queryUserDataByUid(uid: result!.user.uid) { (serviceResult) in
+                    switch serviceResult {
+                        case .failure(let error):
+                            // Error storing the user profile
+                            self.showError(error.localizedDescription)
+                        case .success(let userData):
+                            // Transition to the main screen
+                            if let firstName = userData["firstname"] as? String,
+                               let lastName = userData["lastname"] as? String,
+                               let _ = userData["email"] as? String {
+                                User.setCurrent(User(uid: result!.user.uid, firstName: firstName, lastName: lastName), writeToUserDefaults: true)
+                                self.transitionToMain()
+                            }
+                        }
                     }
                 }
             }
         }
     }
     
-    private func emailVerification(firUser: FIRUser){
-        firUser.sendEmailVerification { error in
-            if (error != nil) {
-                print("email is invalid!")
-                self.showToast(message: "email is invalid!")
-                print(error.debugDescription)
-            }else{
-                print("email is sent! Please verify your email!")
-                self.showToast(message: "Please verify your email and login again!")
-            }
-        }
+    func showError(_ message:String) {
+        errorLabel.text = message
+        errorLabel.alpha = 1
     }
+    
+    func transitionToMain() {
+        let initialViewController = UIStoryboard.initialViewController(for: .main)
+        self.view.window?.rootViewController = initialViewController
+        self.view.window?.makeKeyAndVisible()
+    }
+    
+    func validateFields() -> String? {
+        if emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
+            passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+            return "Please fill in all fields."
+        }
+        // Check that all fields are filled in
+        let cleanPassword = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        if Utilities.isPasswordValid(cleanPassword) == false {
+            return "Please make sure your password is at least 8 characters, contains a special character and a number."
+        }
+        return nil
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+        setUpElements()
+    }
+    
+    func setUpElements() {
+        
+        // Hide the error label
+        errorLabel.alpha = 0;
+        
+        // Style the elements
+        Utilities.styleTextField(emailTextField)
+        Utilities.styleTextField(passwordTextField)
+        Utilities.styleFilledButton(loginButton)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }
-
-

@@ -2,10 +2,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * Options for an on-device image labeler.
- */
+/** Options for an on-device image labeler. */
 NS_SWIFT_NAME(VisionOnDeviceImageLabelerOptions)
+DEPRECATED_MSG_ATTRIBUTE(
+    "This API is deprecated and replaced by the new standalone ML Kit SDK. See the migration guide "
+    "at https://developers.google.com/ml-kit/migration")
 @interface FIRVisionOnDeviceImageLabelerOptions : NSObject
 
 /**

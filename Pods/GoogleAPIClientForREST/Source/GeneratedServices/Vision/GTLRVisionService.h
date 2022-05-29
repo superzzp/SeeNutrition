@@ -10,7 +10,9 @@
 // Documentation:
 //   https://cloud.google.com/vision/
 
-#if GTLR_BUILT_AS_FRAMEWORK
+#if SWIFT_PACKAGE || GTLR_USE_MODULAR_IMPORT
+  @import GoogleAPIClientForRESTCore;
+#elif GTLR_BUILT_AS_FRAMEWORK
   #import "GTLR/GTLRService.h"
 #else
   #import "GTLRService.h"
@@ -31,19 +33,19 @@ NS_ASSUME_NONNULL_BEGIN
 // Authorization scopes
 
 /**
- *  Authorization scope: View and manage your data across Google Cloud Platform
- *  services
+ *  Authorization scope: See, edit, configure, and delete your Google Cloud data
+ *  and see the email address for your Google Account.
  *
  *  Value "https://www.googleapis.com/auth/cloud-platform"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeVisionCloudPlatform;
+FOUNDATION_EXTERN NSString * const kGTLRAuthScopeVisionCloudPlatform;
 /**
  *  Authorization scope: Apply machine learning models to understand and label
  *  images
  *
  *  Value "https://www.googleapis.com/auth/cloud-vision"
  */
-GTLR_EXTERN NSString * const kGTLRAuthScopeVisionCloudVision;
+FOUNDATION_EXTERN NSString * const kGTLRAuthScopeVisionCloudVision;
 
 // ----------------------------------------------------------------------------
 //   GTLRVisionService

@@ -146,7 +146,7 @@
                                     <constraint firstAttribute="width" constant="323" id="lxN-PM-x0x"/>
                                     <constraint firstAttribute="width" constant="323" id="sUR-jA-l7b"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="40"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="default">
@@ -619,17 +619,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="vPx-dM-b9L">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="vUr-tA-lio">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="logoutButtonPressed:" destination="BYZ-38-t0r" id="mDt-Wh-QXd"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="camera" id="JfX-ZG-X6M">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="cameraTapped:" destination="BYZ-38-t0r" id="MNP-cD-N2T"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="organize" id="Wmx-l5-5MI">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <action selector="folderTapped:" destination="BYZ-38-t0r" id="0hI-uL-00k"/>
                                 </connections>

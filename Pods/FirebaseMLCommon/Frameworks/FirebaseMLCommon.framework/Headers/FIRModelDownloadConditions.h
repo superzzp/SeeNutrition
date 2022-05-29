@@ -2,39 +2,38 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * Configurations for model downloading conditions.
- */
+/** Configurations for model downloading conditions. */
 NS_SWIFT_NAME(ModelDownloadConditions)
 @interface FIRModelDownloadConditions : NSObject<NSCopying>
 
 /**
- * Indicates whether Wi-Fi is required for downloading. The default is `NO`.
+ * Indicates whether download requests should be made over a cellular network. The default is `YES`.
  */
-@property(nonatomic, readonly) BOOL isWiFiRequired;
+@property(nonatomic, readonly) BOOL allowsCellularAccess;
 
 /**
  * Indicates whether the model can be downloaded while the app is in the background. The default is
  * `NO`.
  */
-@property(nonatomic, readonly) BOOL canDownloadInBackground;
+@property(nonatomic, readonly) BOOL allowsBackgroundDownloading;
 
 /**
- * Creates an instance of `ModelDownloadConditions` with the given conditions.
+ * Creates a new instance with the given conditions.
  *
- * @param isWiFiRequired Whether a device has to be connected to Wi-Fi for downloading to start.
- * @param canDownloadInBackground Whether the model can be downloaded while the app is in the
+ * @param allowsCellularAccess Whether download requests should be made over a cellular network.
+ * @param allowsBackgroundDownloading Whether the model can be downloaded while the app is in the
  *     background.
- * @return A new instance of `ModelDownloadConditions`.
+ * @return A new `ModelDownloadConditions` instance.
  */
-- (instancetype)initWithIsWiFiRequired:(BOOL)isWiFiRequired
-               canDownloadInBackground:(BOOL)canDownloadInBackground NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithAllowsCellularAccess:(BOOL)allowsCellularAccess
+                 allowsBackgroundDownloading:(BOOL)allowsBackgroundDownloading
+    NS_DESIGNATED_INITIALIZER;
 
 /**
- * Creates an instance of `ModelDownloadConditions` with the default conditions. The default values
- * are listed in the documentation for each download condition property.
+ * Creates a new instance with the default conditions. The default values are specified in the
+ * documentation for each instance property.
  *
- * @return A new instance of `ModelDownloadConditions`.
+ * @return A new `ModelDownloadConditions` instance.
  */
 - (instancetype)init;
 

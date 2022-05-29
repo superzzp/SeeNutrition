@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import FirebaseDatabase.FIRDataSnapshot
 
 class User: Codable{
     
@@ -24,14 +23,26 @@ class User: Codable{
     // MARK: - Class Methods
     
     let uid: String
-    let username: String
+    let firstName: String
+    let lastName: String
     
-    
-    init(uid: String, username: String){
+    init(uid: String, firstName: String, lastName: String){
         self.uid = uid
-        self.username = username
+        self.firstName = firstName
+        self.lastName = lastName
     }
     
+    //    failable initializer
+    //    handle existing users
+    //    if a user doesn't have a UID or a username, fail the initialization and return nil.
+//    init?(snapshot: DataSnapshot) {
+//        guard let dict = snapshot.value as? [String : Any],
+//            let username = dict["username"] as? String
+//            else{return nil}
+//        self.uid = snapshot.key
+//        self.username = username
+//    }
+//
     //method to persist the current user to UserDefaults so that user don't need to log in repetitively
     //also set the singleton _user = user
     static func setCurrent(_ user: User, writeToUserDefaults: Bool = false) {
@@ -43,23 +54,9 @@ class User: Codable{
         _current = user
     }
     
-    //return the current username if it exist
-    static func getCurrent() -> String?{
-        return _current?.username
+    //return the current user's first name if it exist, otherwise return nil
+    static func getCurrentFirstName() -> String?{
+        return _current?.firstName
     }
-    
-    
-    //    failable initializer
-    //    handle existing users
-    //    if a user doesn't have a UID or a username, fail the initialization and return nil.
-    init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String : Any],
-            let username = dict["username"] as? String
-            else{return nil}
-        
-        self.uid = snapshot.key
-        self.username = username
-        
-    }
-    
+
 }

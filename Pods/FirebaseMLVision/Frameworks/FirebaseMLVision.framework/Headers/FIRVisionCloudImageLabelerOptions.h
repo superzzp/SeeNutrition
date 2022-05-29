@@ -2,9 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * Options for a cloud image labeler.
- */
+/** Options for a cloud image labeler. */
 NS_SWIFT_NAME(VisionCloudImageLabelerOptions)
 @interface FIRVisionCloudImageLabelerOptions : NSObject
 

@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>"Allow SeeFood to use camera to take photo of the food"</string>
+	<string>&quot;Allow SeeFood to use camera to take photo of the food&quot;</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>"Allow SeeFood to select image from photo library to classify"</string>
+	<string>&quot;Allow SeeFood to select image from photo library to classify&quot;</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -48,6 +48,8 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 </dict>
 </plist>

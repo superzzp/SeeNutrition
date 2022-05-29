@@ -9,14 +9,14 @@
 import UIKit
 import SVProgressHUD
 import Social
-import Firebase
 import SwiftyJSON
 import Alamofire
-import ARKit
+import FirebaseMLVision
 import FirebaseAuth
 
 class FoodSelectionViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
+    //Weak outlet. Prevent retain cycle between view controllers and subviews.
     @IBOutlet weak var folderButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var HotdogImageView: UIImageView!
@@ -47,7 +47,11 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         // Do any additional setup after loading the view, typically from a nib.
         imgPickerController.delegate = self
         initializeDesigns()
-        showToast(message: "Welcome, \(User.getCurrent()!)")
+        if let userName = User.getCurrentFirstName() {
+            showToast(message: "Welcome, \(userName)")
+        } else {
+            showToast(message: "Welcome, Local Test User")
+        }
     }
     
     func initializeDesigns() {
@@ -89,12 +93,11 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     //Cloud base image detection
     func runGoogleMLVisualRecognition(image: UIImage) {
         //configuration
-        let options = VisionCloudDetectorOptions()
-        options.modelType = .latest
-        options.maxResults = 10
+        let options = VisionCloudImageLabelerOptions();
+        options.confidenceThreshold = 0.75
         
-        //get an instance of imageDetector
-        let labelDetector = Vision.vision().cloudImageLabeler()
+        //get an instance of imageLabeler
+        let labelDetector = Vision.vision().cloudImageLabeler(options: options)
         
         //convert UIImage to VisionImage
         let image: VisionImage = VisionImage(image: image)
@@ -105,15 +108,12 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
                 print("fail to classify the image!")
                 return
             }
-            
             // Labeled image
-            // START_EXCLUDE
             print("================classification results ===================")
             for label in labels {
                 let labelText = label.text
                 let confidence = label.confidence!
                 print ("label: \(labelText), confidence: \(confidence)")
-                
                 //append all names of classification results to a global list
                 self.classificationResults.append(labelText)
             }
@@ -126,61 +126,78 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
                 self.folderButton.isEnabled = true
                 SVProgressHUD.dismiss()
             }
-            self.checkFoodAndSetUI();
+            self.renderLabelResults();
         }
     }
     
     //check if a array of strings contain food item
     func checkFood(array: [String]) -> Bool{
+        let ln = LabelName();
         for item in array {
-            if (item.lowercased().range(of: "food") != nil || item.lowercased().range(of: "dish") != nil) {
-                return true
+            for name in ln.genericFoodNames {
+                if (item.lowercased().contains(name)) {
+                   return true
+                }
             }
         }
         return false
     }
     
-    func checkFoodAndSetUI() {
+    func renderLabelResults() {
         //detect food product
-        if (checkFood(array: classificationResults)) {
-            self.assignNonFoodDescription(descriptionArray: self.classificationResults)
-            //food detected but no suitable text description, treat as food not detected
-            if self.foodItemResults.count <= 0 {
-                self.setUIWhenFoodNotDetected()
-            }
-            print(self.foodItemResults)
-            //grand central dispatch
-            DispatchQueue.main.async {
-                self.navigationItem.title = "Food detected!"
-                self.navigationController?.navigationBar.barTintColor = UIColor.init(displayP3Red: 60.0/255, green:179.0/255 , blue: 113.0/255, alpha: 1)
-                self.navigationController?.navigationBar.isTranslucent = false
-                self.HotdogImageView.image = UIImage(named: "correct")
-                self.foodNameIndicatorText.isHidden = false
-
-                if self.foodItemResults.count == 1 {
-                    self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                    self.foodDescriptionButtonA.isHidden = false
-                }
-
-                if self.foodItemResults.count == 2 {
-                    self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                    self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
-                    self.foodDescriptionButtonA.isHidden = false
-                    self.foodDescriptionButtonB.isHidden = false
-                }
-
-                if self.foodItemResults.count == 3 || self.foodItemResults.count > 3 {
-                    self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                    self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
-                    self.foodDescriptionButtonC.setTitle(self.foodItemResults[2], for: UIControl.State.normal)
-                    self.foodDescriptionButtonA.isHidden = false
-                    self.foodDescriptionButtonB.isHidden = false
-                    self.foodDescriptionButtonC.isHidden = false
-                }
-            }
+        if (checkFood(array: self.classificationResults)) {
+            self.setUIWhenFoodDetected()
         }else{
             //not a food product
             self.setUIWhenFoodNotDetected()
+        }
+    }
+    
+    func setUIWhenFoodDetected() {
+        self.assignNonGenericFoodDescription(descriptionArray: self.classificationResults)
+        //food detected but no suitable text description, treat as food not detected
+        if self.foodItemResults.count <= 0 {
+            self.setUIWhenFoodNotDetected()
+        }
+        print(self.foodItemResults)
+        //grand central dispatch
+        DispatchQueue.main.async {
+            self.navigationItem.title = "Food detected!"
+            self.navigationController?.navigationBar.barTintColor = UIColor.init(displayP3Red: 60.0/255, green:179.0/255 , blue: 113.0/255, alpha: 1)
+            self.navigationController?.navigationBar.isTranslucent = false
+            self.HotdogImageView.image = UIImage(named: "correct")
+            self.foodNameIndicatorText.isHidden = false
+
+            if self.foodItemResults.count == 1 {
+                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                self.foodDescriptionButtonA.isHidden = false
+            }
+
+            if self.foodItemResults.count == 2 {
+                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
+                self.foodDescriptionButtonA.isHidden = false
+                self.foodDescriptionButtonB.isHidden = false
+            }
+
+            if self.foodItemResults.count > 2 {
+                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
+                self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
+                self.foodDescriptionButtonC.setTitle(self.foodItemResults[2], for: UIControl.State.normal)
+                self.foodDescriptionButtonA.isHidden = false
+                self.foodDescriptionButtonB.isHidden = false
+                self.foodDescriptionButtonC.isHidden = false
+            }
+        }
+    }
+    
+    func setUIWhenFoodNotDetected() {
+        //grand central dispatch
+        DispatchQueue.main.async {
+            self.navigationItem.title = "Food not detected!"
+            self.navigationController?.navigationBar.barTintColor = UIColor.red
+            self.navigationController?.navigationBar.isTranslucent = false
+            self.HotdogImageView.image = UIImage(named: "error")
         }
     }
     
@@ -199,36 +216,29 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             imageView.image = image
             //dismiss the imgPickerController after presented
             imgPickerController.dismiss(animated: true, completion: nil)
-            
-            //watson imageRecognition currently has strange bug, use google image reg instaead
-            //runWatsonVisualRecognition(image: image)
-            
+            //Run google image recognition
             runGoogleMLVisualRecognition(image: image)
-            
         }else{
             print("there was an error picking the image")
         }
-        
     }
-    
-    func setUIWhenFoodNotDetected(){
-        //grand central dispatch
-        DispatchQueue.main.async {
-            self.navigationItem.title = "Food not detected!"
-            self.navigationController?.navigationBar.barTintColor = UIColor.red
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.HotdogImageView.image = UIImage(named: "error")
-        }
-    }
-    
+
     
     //assign to foodItemResults the elements of the description that only contains description of food and nothing else
     //(excluding items which contain string color, food, nutrition, plant, dish, restaurant, building
-    func assignNonFoodDescription(descriptionArray: [String]) {
+    func assignNonGenericFoodDescription(descriptionArray: [String]) {
         var foodDescriptionArray: [String] = []
+        let ln = LabelName();
         for item in descriptionArray {
-            if (item.lowercased().range(of: "color") == nil && item.lowercased().range(of: "food") == nil && item.lowercased().range(of: "nutrition") == nil && item.lowercased().range(of: "plant") == nil && item.lowercased().range(of: "dish") == nil && item.lowercased().range(of: "restaurant") == nil && item.lowercased().range(of: "building") == nil && item.lowercased().range(of: "ing") == nil && item.lowercased().range(of: "cuisine") == nil
-            ){
+            let filteredNames: [String] = ln.genericFoodNames + ln.genericNonFoodNames;
+            var filter_curr_item: Bool = false
+            for fn in filteredNames {
+                if (item.lowercased().contains(fn)){
+                    filter_curr_item = true
+                    break
+                }
+            }
+            if (filter_curr_item == false) {
                 foodDescriptionArray.append(item)
             }
         }
@@ -291,8 +301,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             }else{
                 print("the camera does not support taking image")
             }
-            
-            
         }else{
             //give user an alert if the device does not have a camara
             let alert = UIAlertController(title: "Camera Unvaliable", message: "Please use a device with a working camera to use the app.", preferredStyle: .alert)
@@ -325,28 +333,21 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             "x-app-id" : nuixAppID,
             "x-app-key": nuixAppKeys
         ]
-
         let parameters: Parameters = [
             "query":currentPickedFoodItem,
             "timezone": nuixTimezone
         ]
-
-        Alamofire.request(nuixURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if response.result.isSuccess {
-                print("successfully get JSON data!")
-                let jso: JSON = JSON(response.result.value!)
-//                print(jso)
-                self.updateNutritionData(json: jso)
-                print("================================line 416====================")
-                print(self.nutritionDataModel.food_name)
-                self.performSegue(withIdentifier: "toFoodDataViewController", sender:UIViewController.self)
-//                self.delegate?.userSelectedANutritionEntry()
-
-            }else{
-                print("fail to get JSON response!")
-                DispatchQueue.main.async {
-                    self.navigationItem.title = "Fail to get nutrition infomation"
-                }
+        AF.request(nuixURL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    self.updateNutritionData(json: json)
+                    self.performSegue(withIdentifier: "toFoodDataViewController", sender:UIViewController.self)
+                case .failure(let result):
+                    print(result)
+                    DispatchQueue.main.async {
+                        self.navigationItem.title = "Fail to get nutrition infomation."
+                    }
             }
         }
     }
@@ -355,11 +356,9 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         self.nutritionDataModel.food_name = json["foods"][0]["food_name"].stringValue
         self.nutritionDataModel.brand_name = json["foods"][0]["brand_name"].stringValue
         self.nutritionDataModel.serving_unit = json["foods"][0]["serving_unit"].stringValue
-        
         self.nutritionDataModel.serving_weight_grams = json["foods"][0]["serving_weight_grams"].intValue
         self.nutritionDataModel.serving_qty = json["foods"][0]["serving_qty"].intValue
         self.nutritionDataModel.nf_calories = json["foods"][0]["nf_calories"].intValue
-        
         self.nutritionDataModel.nf_total_fat = json["foods"][0]["nf_total_fat"].doubleValue
         self.nutritionDataModel.nf_saturated_fat = json["foods"][0]["nf_saturated_fat"].doubleValue
         self.nutritionDataModel.nf_cholesterol = json["foods"][0]["nf_cholesterol"].doubleValue
@@ -370,17 +369,15 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         self.nutritionDataModel.nf_protein = json["foods"][0]["nf_protein"].doubleValue
         self.nutritionDataModel.nf_potassium = json["foods"][0]["nf_potassium"].doubleValue
         self.nutritionDataModel.nf_p = json["foods"][0]["nf_p"].doubleValue
-        
     }
 
     
     @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
         do{
-        print("=====logout pressed!!!!=====")
             try Auth.auth().signOut()
-        let initialViewController = UIStoryboard.initialViewController(for: .login)
-        self.view.window?.rootViewController = initialViewController
-        self.view.window?.makeKeyAndVisible()
+            let initialViewController = UIStoryboard.initialViewController(for: .login)
+            self.view.window?.rootViewController = initialViewController
+            self.view.window?.makeKeyAndVisible()
         }catch let err{
             print(err)
         }

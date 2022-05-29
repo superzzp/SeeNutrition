@@ -2,19 +2,19 @@
 platform :ios, '12.0'
 
 target 'SeeNutrition' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  # Co/Users/alexzhang/Documents/Projects/SeeNutrition/Podfilemment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for SeeFood
   pod 'SVProgressHUD'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'Firebase/Core'
+  pod 'FirebaseFirestore'
+  pod 'FirebaseCore'
+  pod 'FirebaseAuth'
+  pod 'FirebaseDatabase'
+  pod 'FirebaseStorage'
+  pod 'FirebaseRemoteConfig'
   pod 'Firebase/MLVision'
-  pod 'Firebase/Auth'
-  pod 'FirebaseUI/Auth'
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
-  pod 'Firebase/RemoteConfig'
 
 end

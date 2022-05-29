@@ -19,7 +19,6 @@ class FoodDataViewController: UIViewController, UINavigationControllerDelegate {
         
         foodDataTextView.text = "\n\n\(nutritionD.food_name)\n" + "\(nutritionD.serving_qty) \(nutritionD.serving_unit)\n" + "(each \(nutritionD.serving_weight_grams) grams)\n" + "\n" + "calories: \(nutritionD.nf_calories)\n" + "fat: \(nutritionD.nf_total_fat)g\n" + "sodium: \(nutritionD.nf_sodium)mg\n" + "carbohydrate: \(nutritionD.nf_total_carbohydrate)g\n" + "sugars: \(nutritionD.nf_sugars)g\n" + "protein: \(nutritionD.nf_protein)g\n" + "fiber: \(nutritionD.nf_dietary_fiber)g"
         initializeDesigns()
-        
     }
     
     func initializeDesigns() {

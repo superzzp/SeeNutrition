@@ -147,6 +147,7 @@ static BOOL DictDefault_IsValidValue(int32_t value) {
 //%SERIALIZE_SUPPORT_3_TYPE(Object, id, Message, String, Bytes)
 //%PDDM-EXPAND SERIALIZE_SUPPORT_HELPERS()
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 static size_t ComputeDictInt32FieldSize(int32_t value, uint32_t fieldNum, GPBDataType dataType) {
   if (dataType == GPBDataTypeInt32) {
@@ -325,6 +326,7 @@ static void WriteDictObjectField(GPBCodedOutputStream *stream, id value, uint32_
   }
 }
 
+// clang-format on
 //%PDDM-EXPAND-END SERIALIZE_SUPPORT_HELPERS()
 
 size_t GPBDictionaryComputeSizeInternalHelper(NSDictionary *dict, GPBFieldDescriptor *field) {
@@ -508,7 +510,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 #if defined(__clang_analyzer__)
         case GPBDataTypeGroup:
           // Maps can't really have Groups as the value type, but this case is needed
-          // so the analyzer won't report the posibility of send nil in for the value
+          // so the analyzer won't report the possibility of send nil in for the value
           // in the NSMutableDictionary case below.
 #endif
         case GPBDataTypeMessage: {
@@ -719,7 +721,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 //%}
 //%
 //%- (void)enumerateKeysAndEnumsUsingBlock:
-//%    (void (^)(KEY_TYPE KisP##key, VALUE_TYPE value, BOOL *stop))block {
+//%    (void (NS_NOESCAPE ^)(KEY_TYPE KisP##key, VALUE_TYPE value, BOOL *stop))block {
 //%  GPBEnumValidationFunc func = _validationFunc;
 //%  BOOL stop = NO;
 //%  NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -792,7 +794,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 //%}
 //%
 //%- (void)enumerateKeysAnd##ACCESSOR_NAME##VNAME##sUsingBlock:
-//%    (void (^)(KEY_TYPE KisP##key, VALUE_TYPE VNAME_VAR, BOOL *stop))block {
+//%    (void (NS_NOESCAPE ^)(KEY_TYPE KisP##key, VALUE_TYPE VNAME_VAR, BOOL *stop))block {
 //%  BOOL stop = NO;
 //%  NSDictionary *internal = _dictionary;
 //%  NSEnumerator *keys = [internal keyEnumerator];
@@ -857,7 +859,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 //%  [_dictionary setObject:WRAPPED##VHELPER(value->##GPBVALUE_##VHELPER(VALUE_NAME)##) forKey:WRAPPED##KHELPER(key->value##KEY_NAME)];
 //%}
 //%
-//%- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+//%- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
 //%  [self enumerateKeysAnd##ACCESSOR_NAME##VNAME##sUsingBlock:^(KEY_TYPE KisP##key, VALUE_TYPE VNAME_VAR, BOOL *stop) {
 //%      #pragma unused(stop)
 //%      block(TEXT_FORMAT_OBJ##KEY_NAME(key), TEXT_FORMAT_OBJ##VALUE_NAME(VNAME_VAR));
@@ -967,7 +969,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 //%
 //%BOOL_SET_GPBVALUE_FOR_KEY_##HELPER(VALUE_NAME, VALUE_TYPE, VisP)
 //%
-//%- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+//%- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
 //%  if (BOOL_DICT_HAS##HELPER(0, )) {
 //%    block(@"false", TEXT_FORMAT_OBJ##VALUE_NAME(_values[0]));
 //%  }
@@ -977,7 +979,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 //%}
 //%
 //%- (void)enumerateKeysAnd##VNAME##sUsingBlock:
-//%    (void (^)(BOOL key, VALUE_TYPE VNAME_VAR, BOOL *stop))block {
+//%    (void (NS_NOESCAPE ^)(BOOL key, VALUE_TYPE VNAME_VAR, BOOL *stop))block {
 //%  BOOL stop = NO;
 //%  if (BOOL_DICT_HAS##HELPER(0, )) {
 //%    block(NO, _values[0], &stop);
@@ -1427,6 +1429,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 //%PDDM-EXPAND DICTIONARY_IMPL_FOR_POD_KEY(UInt32, uint32_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - UInt32 -> UInt32
 
@@ -1505,7 +1508,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(uint32_t key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -1570,7 +1573,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt32) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt32sUsingBlock:^(uint32_t key, uint32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%u", value]);
@@ -1688,7 +1691,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(uint32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -1753,7 +1756,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt32) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt32sUsingBlock:^(uint32_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%d", value]);
@@ -1871,7 +1874,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(uint32_t key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -1936,7 +1939,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt64) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt64sUsingBlock:^(uint32_t key, uint64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%llu", value]);
@@ -2054,7 +2057,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(uint32_t key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -2119,7 +2122,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt64) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt64sUsingBlock:^(uint32_t key, int64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%lld", value]);
@@ -2237,7 +2240,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(uint32_t key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -2302,7 +2305,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueBool) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndBoolsUsingBlock:^(uint32_t key, BOOL value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], (value ? @"true" : @"false"));
@@ -2420,7 +2423,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(uint32_t key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, float value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -2485,7 +2488,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueFloat) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndFloatsUsingBlock:^(uint32_t key, float value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%.*g", FLT_DIG, value]);
@@ -2603,7 +2606,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(uint32_t key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, double value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -2668,7 +2671,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueDouble) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndDoublesUsingBlock:^(uint32_t key, double value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], [NSString stringWithFormat:@"%.*lg", DBL_DIG, value]);
@@ -2799,7 +2802,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(uint32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -2876,7 +2879,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueEnum) forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndRawValuesUsingBlock:^(uint32_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], @(value));
@@ -2904,7 +2907,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(uint32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, int32_t value, BOOL *stop))block {
   GPBEnumValidationFunc func = _validationFunc;
   BOOL stop = NO;
   NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -3042,7 +3045,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:
-    (void (^)(uint32_t key, id object, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint32_t key, id object, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -3131,7 +3134,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:value->valueString forKey:@(key->valueUInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndObjectsUsingBlock:^(uint32_t key, id object, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%u", key], object);
@@ -3173,8 +3176,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_IMPL_FOR_POD_KEY(Int32, int32_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Int32 -> UInt32
 
@@ -3253,7 +3258,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(int32_t key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -3318,7 +3323,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt32) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt32sUsingBlock:^(int32_t key, uint32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%u", value]);
@@ -3436,7 +3441,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(int32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -3501,7 +3506,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt32) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt32sUsingBlock:^(int32_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%d", value]);
@@ -3619,7 +3624,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(int32_t key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -3684,7 +3689,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt64) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt64sUsingBlock:^(int32_t key, uint64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%llu", value]);
@@ -3802,7 +3807,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(int32_t key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -3867,7 +3872,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt64) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt64sUsingBlock:^(int32_t key, int64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%lld", value]);
@@ -3985,7 +3990,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(int32_t key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -4050,7 +4055,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueBool) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndBoolsUsingBlock:^(int32_t key, BOOL value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], (value ? @"true" : @"false"));
@@ -4168,7 +4173,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(int32_t key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, float value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -4233,7 +4238,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueFloat) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndFloatsUsingBlock:^(int32_t key, float value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%.*g", FLT_DIG, value]);
@@ -4351,7 +4356,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(int32_t key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, double value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -4416,7 +4421,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueDouble) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndDoublesUsingBlock:^(int32_t key, double value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], [NSString stringWithFormat:@"%.*lg", DBL_DIG, value]);
@@ -4547,7 +4552,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(int32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -4624,7 +4629,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueEnum) forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndRawValuesUsingBlock:^(int32_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], @(value));
@@ -4652,7 +4657,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(int32_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, int32_t value, BOOL *stop))block {
   GPBEnumValidationFunc func = _validationFunc;
   BOOL stop = NO;
   NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -4790,7 +4795,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:
-    (void (^)(int32_t key, id object, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int32_t key, id object, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -4879,7 +4884,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:value->valueString forKey:@(key->valueInt32)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndObjectsUsingBlock:^(int32_t key, id object, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%d", key], object);
@@ -4921,8 +4926,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_IMPL_FOR_POD_KEY(UInt64, uint64_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - UInt64 -> UInt32
 
@@ -5001,7 +5008,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(uint64_t key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5066,7 +5073,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt32) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt32sUsingBlock:^(uint64_t key, uint32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%u", value]);
@@ -5184,7 +5191,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(uint64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5249,7 +5256,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt32) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt32sUsingBlock:^(uint64_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%d", value]);
@@ -5367,7 +5374,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(uint64_t key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5432,7 +5439,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt64) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt64sUsingBlock:^(uint64_t key, uint64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%llu", value]);
@@ -5550,7 +5557,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(uint64_t key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5615,7 +5622,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt64) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt64sUsingBlock:^(uint64_t key, int64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%lld", value]);
@@ -5733,7 +5740,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(uint64_t key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5798,7 +5805,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueBool) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndBoolsUsingBlock:^(uint64_t key, BOOL value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], (value ? @"true" : @"false"));
@@ -5916,7 +5923,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(uint64_t key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, float value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -5981,7 +5988,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueFloat) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndFloatsUsingBlock:^(uint64_t key, float value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%.*g", FLT_DIG, value]);
@@ -6099,7 +6106,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(uint64_t key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, double value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -6164,7 +6171,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueDouble) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndDoublesUsingBlock:^(uint64_t key, double value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], [NSString stringWithFormat:@"%.*lg", DBL_DIG, value]);
@@ -6295,7 +6302,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(uint64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -6372,7 +6379,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueEnum) forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndRawValuesUsingBlock:^(uint64_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], @(value));
@@ -6400,7 +6407,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(uint64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, int32_t value, BOOL *stop))block {
   GPBEnumValidationFunc func = _validationFunc;
   BOOL stop = NO;
   NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -6538,7 +6545,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:
-    (void (^)(uint64_t key, id object, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(uint64_t key, id object, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -6627,7 +6634,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:value->valueString forKey:@(key->valueUInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndObjectsUsingBlock:^(uint64_t key, id object, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%llu", key], object);
@@ -6669,8 +6676,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_IMPL_FOR_POD_KEY(Int64, int64_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Int64 -> UInt32
 
@@ -6749,7 +6758,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(int64_t key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -6814,7 +6823,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt32) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt32sUsingBlock:^(int64_t key, uint32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%u", value]);
@@ -6932,7 +6941,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(int64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -6997,7 +7006,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt32) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt32sUsingBlock:^(int64_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%d", value]);
@@ -7115,7 +7124,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(int64_t key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -7180,7 +7189,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt64) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt64sUsingBlock:^(int64_t key, uint64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%llu", value]);
@@ -7298,7 +7307,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(int64_t key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -7363,7 +7372,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt64) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt64sUsingBlock:^(int64_t key, int64_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%lld", value]);
@@ -7481,7 +7490,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(int64_t key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -7546,7 +7555,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueBool) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndBoolsUsingBlock:^(int64_t key, BOOL value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], (value ? @"true" : @"false"));
@@ -7664,7 +7673,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(int64_t key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, float value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -7729,7 +7738,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueFloat) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndFloatsUsingBlock:^(int64_t key, float value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%.*g", FLT_DIG, value]);
@@ -7847,7 +7856,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(int64_t key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, double value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -7912,7 +7921,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueDouble) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndDoublesUsingBlock:^(int64_t key, double value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], [NSString stringWithFormat:@"%.*lg", DBL_DIG, value]);
@@ -8043,7 +8052,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(int64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -8120,7 +8129,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueEnum) forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndRawValuesUsingBlock:^(int64_t key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], @(value));
@@ -8148,7 +8157,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(int64_t key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, int32_t value, BOOL *stop))block {
   GPBEnumValidationFunc func = _validationFunc;
   BOOL stop = NO;
   NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -8286,7 +8295,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:
-    (void (^)(int64_t key, id object, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(int64_t key, id object, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -8375,7 +8384,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:value->valueString forKey:@(key->valueInt64)];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndObjectsUsingBlock:^(int64_t key, id object, BOOL *stop) {
       #pragma unused(stop)
       block([NSString stringWithFormat:@"%lld", key], object);
@@ -8417,8 +8426,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_POD_IMPL_FOR_KEY(String, NSString, *, OBJECT)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - String -> UInt32
 
@@ -8501,7 +8512,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(NSString *key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -8566,7 +8577,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt32) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt32sUsingBlock:^(NSString *key, uint32_t value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%u", value]);
@@ -8692,7 +8703,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(NSString *key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -8757,7 +8768,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt32) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt32sUsingBlock:^(NSString *key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%d", value]);
@@ -8883,7 +8894,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(NSString *key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -8948,7 +8959,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueUInt64) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndUInt64sUsingBlock:^(NSString *key, uint64_t value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%llu", value]);
@@ -9074,7 +9085,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(NSString *key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -9139,7 +9150,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueInt64) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndInt64sUsingBlock:^(NSString *key, int64_t value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%lld", value]);
@@ -9265,7 +9276,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(NSString *key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -9330,7 +9341,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueBool) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndBoolsUsingBlock:^(NSString *key, BOOL value, BOOL *stop) {
       #pragma unused(stop)
       block(key, (value ? @"true" : @"false"));
@@ -9456,7 +9467,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(NSString *key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, float value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -9521,7 +9532,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueFloat) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndFloatsUsingBlock:^(NSString *key, float value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%.*g", FLT_DIG, value]);
@@ -9647,7 +9658,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(NSString *key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, double value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -9712,7 +9723,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueDouble) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndDoublesUsingBlock:^(NSString *key, double value, BOOL *stop) {
       #pragma unused(stop)
       block(key, [NSString stringWithFormat:@"%.*lg", DBL_DIG, value]);
@@ -9851,7 +9862,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(NSString *key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   NSDictionary *internal = _dictionary;
   NSEnumerator *keys = [internal keyEnumerator];
@@ -9928,7 +9939,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   [_dictionary setObject:@(value->valueEnum) forKey:key->valueString];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   [self enumerateKeysAndRawValuesUsingBlock:^(NSString *key, int32_t value, BOOL *stop) {
       #pragma unused(stop)
       block(key, @(value));
@@ -9956,7 +9967,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(NSString *key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(NSString *key, int32_t value, BOOL *stop))block {
   GPBEnumValidationFunc func = _validationFunc;
   BOOL stop = NO;
   NSEnumerator *keys = [_dictionary keyEnumerator];
@@ -10021,11 +10032,13 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND-END (5 expansions)
 
 
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(UInt32, uint32_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> UInt32
 
@@ -10143,7 +10156,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%u", _values[0]]);
   }
@@ -10153,7 +10166,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt32sUsingBlock:
-    (void (^)(BOOL key, uint32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, uint32_t value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -10233,8 +10246,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(Int32, int32_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Int32
 
@@ -10352,7 +10367,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%d", _values[0]]);
   }
@@ -10362,7 +10377,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt32sUsingBlock:
-    (void (^)(BOOL key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -10442,8 +10457,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(UInt64, uint64_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> UInt64
 
@@ -10561,7 +10578,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%llu", _values[0]]);
   }
@@ -10571,7 +10588,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndUInt64sUsingBlock:
-    (void (^)(BOOL key, uint64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, uint64_t value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -10651,8 +10668,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(Int64, int64_t)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Int64
 
@@ -10770,7 +10789,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%lld", _values[0]]);
   }
@@ -10780,7 +10799,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndInt64sUsingBlock:
-    (void (^)(BOOL key, int64_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, int64_t value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -10860,8 +10879,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(Bool, BOOL)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Bool
 
@@ -10979,7 +11000,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", (_values[0] ? @"true" : @"false"));
   }
@@ -10989,7 +11010,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndBoolsUsingBlock:
-    (void (^)(BOOL key, BOOL value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, BOOL value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -11069,8 +11090,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(Float, float)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Float
 
@@ -11188,7 +11211,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%.*g", FLT_DIG, _values[0]]);
   }
@@ -11198,7 +11221,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndFloatsUsingBlock:
-    (void (^)(BOOL key, float value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, float value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -11278,8 +11301,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_POD_IMPL(Double, double)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Double
 
@@ -11397,7 +11422,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _valueSet[idx] = YES;
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", [NSString stringWithFormat:@"%.*lg", DBL_DIG, _values[0]]);
   }
@@ -11407,7 +11432,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndDoublesUsingBlock:
-    (void (^)(BOOL key, double value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, double value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -11487,8 +11512,10 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND DICTIONARY_BOOL_KEY_TO_OBJECT_IMPL(Object, id)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 #pragma mark - Bool -> Object
 
@@ -11598,7 +11625,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   _values[idx] = [value->valueString retain];
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_values[0] != nil) {
     block(@"false", _values[0]);
   }
@@ -11608,7 +11635,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndObjectsUsingBlock:
-    (void (^)(BOOL key, id object, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, id object, BOOL *stop))block {
   BOOL stop = NO;
   if (_values[0] != nil) {
     block(NO, _values[0], &stop);
@@ -11717,6 +11744,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 @end
 
+// clang-format on
 //%PDDM-EXPAND-END (8 expansions)
 
 #pragma mark - Bool -> Enum
@@ -11857,7 +11885,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndRawValuesUsingBlock:
-    (void (^)(BOOL key, int32_t value, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, int32_t value, BOOL *stop))block {
   BOOL stop = NO;
   if (_valueSet[0]) {
     block(NO, _values[0], &stop);
@@ -11868,7 +11896,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 }
 
 - (void)enumerateKeysAndEnumsUsingBlock:
-    (void (^)(BOOL key, int32_t rawValue, BOOL *stop))block {
+    (void (NS_NOESCAPE ^)(BOOL key, int32_t rawValue, BOOL *stop))block {
   BOOL stop = NO;
   GPBEnumValidationFunc func = _validationFunc;
   int32_t validatedValue;
@@ -11890,6 +11918,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
 
 //%PDDM-EXPAND SERIAL_DATA_FOR_ENTRY_POD_Enum(Bool)
 // This block of code is generated, do not edit it directly.
+// clang-format off
 
 - (NSData *)serializedDataForUnknownValue:(int32_t)value
                                    forKey:(GPBGenericValue *)key
@@ -11904,6 +11933,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   return data;
 }
 
+// clang-format on
 //%PDDM-EXPAND-END SERIAL_DATA_FOR_ENTRY_POD_Enum(Bool)
 
 - (size_t)computeSerializedSizeAsField:(GPBFieldDescriptor *)field {
@@ -11942,7 +11972,7 @@ void GPBDictionaryReadEntry(id mapDictionary,
   }
 }
 
-- (void)enumerateForTextFormat:(void (^)(id keyObj, id valueObj))block {
+- (void)enumerateForTextFormat:(void (NS_NOESCAPE ^)(id keyObj, id valueObj))block {
   if (_valueSet[0]) {
     block(@"false", @(_values[0]));
   }

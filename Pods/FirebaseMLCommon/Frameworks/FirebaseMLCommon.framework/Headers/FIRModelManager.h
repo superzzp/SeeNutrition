@@ -1,71 +1,88 @@
 #import <Foundation/Foundation.h>
 
-@class FIRCloudModelSource;
-@class FIRLocalModelSource;
+@class FIRApp;
+@class FIRModelDownloadConditions;
+@class FIRRemoteModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- * A Firebase model manager for both local and cloud models.
- */
+/** Manages models that are used by MLKit features. */
 NS_SWIFT_NAME(ModelManager)
 @interface FIRModelManager : NSObject
 
 /**
- * Gets the model manager for the default Firebase app. The default Firebase app instance must be
- * configured before calling this method; otherwise raises `FIRAppNotConfigured` exception. The
- * returned model manager is thread safe. Models hosted in non-default Firebase apps are currently
- * not supported.
+ * Returns the `ModelManager` instance for the default Firebase app. The default Firebase app
+ * instance must be configured before calling this method; otherwise, raises `FIRAppNotConfigured`
+ * exception.
  *
- * @return A model manager for the default Firebase app.
+ * @return The `ModelManager` instance for the default Firebase app.
  */
 + (instancetype)modelManager NS_SWIFT_NAME(modelManager());
 
-/** Unavailable. Use the `modelManager` class method. */
+/**
+ * Returns the `ModelManager` instance for the given custom Firebase app. The custom Firebase app
+ * instance must be configured before calling this method; otherwise, raises `FIRAppNotConfigured`
+ * exception.
+ *
+ * @param app The custom Firebase app instance.
+ * @return The `ModelManager` instance for the given custom Firebase app.
+ */
++ (instancetype)modelManagerForApp:(FIRApp *)app NS_SWIFT_NAME(modelManager(app:));
+
+/** Unavailable. Use the `modelManager()` or `modelManager(app:)` class methods. */
 - (instancetype)init NS_UNAVAILABLE;
 
 /**
- * Registers a cloud model. The model name is unique to each cloud model and can only be registered
- * once with a given instance of the `ModelManager`. The model name should be the same name used
- * when uploading the model to the Firebase Console. It's OK to separately register a cloud model
- * and a local model with the same name for a given instance of the `ModelManager`.
+ * Checks whether the given model has been downloaded.
  *
- * @param cloudModelSource The cloud model source to register.
- * @return Whether the registration was successful. Returns `NO` if the given `cloudModelSource` is
- *     invalid or has already been registered.
+ * @param remoteModel The model to check the download status for.
+ * @return Whether the given model has been downloaded.
  */
-- (BOOL)registerCloudModelSource:(FIRCloudModelSource *)cloudModelSource;
+- (BOOL)isModelDownloaded:(FIRRemoteModel *)remoteModel;
 
 /**
- * Registers a local model. The model name is unique to each local model and can only be registered
- * once with a given instance of the `ModelManager`. It's OK to separately register a cloud model
- * and a local model with the same name for a given instance of the `ModelManager`.
+ * Downloads the given model from the server to a local directory on the device. Use
+ * `isModelDownloaded(_:)` to check the download status for the model. If this method is invoked and
+ * the model has already been downloaded, a request is made to check if a newer version of the model
+ * is available for download. If available, the new version of the model is downloaded.
  *
- * @param localModelSource The local model source to register.
- * @return Whether the registration was successful. Returns `NO` if the given `localModelSource` is
- *     invalid or has already been registered.
+ * To be notified when a model download request completes, observe the
+ *     `.firebaseMLModelDownloadDidSucceed` (indicating model is ready to use) and
+ *     `.firebaseMLModelDownloadDidFail` notifications defined in
+ *     `FIRModelDownloadNotifications.h`. If the latest model is already downloaded, completes
+ *     without additional work and posts a `.firebaseMLModelDownloadDidSucceed` notification,
+ *     indicating that the model is ready to use.
+ *
+ * @param remoteModel The model to download.
+ * @param conditions The conditions for downloading the model.
+ * @return Progress for downloading the model.
  */
-- (BOOL)registerLocalModelSource:(FIRLocalModelSource *)localModelSource;
+- (NSProgress *)downloadModel:(FIRRemoteModel *)remoteModel
+                   conditions:(FIRModelDownloadConditions *)conditions
+    NS_SWIFT_NAME(download(_:conditions:));
 
 /**
- * Gets the registered cloud model with the given name. Returns `nil` if the model was never
- * registered with this model manager.
+ * Deletes the downloaded model from the device.
  *
- * @param name Name of the cloud model.
- * @return The cloud model that was registered with the given name. Returns `nil` if the model was
- *     never registered with this model manager.
+ * @param remoteModel The downloaded model to delete.
+ * @param completion Handler to call back on the main queue when the model deletion completed
+ *     successfully or failed with the given `error`.
  */
-- (nullable FIRCloudModelSource *)cloudModelSourceForModelName:(NSString *)name;
+- (void)deleteDownloadedModel:(FIRRemoteModel *)remoteModel
+                   completion:(void (^)(NSError *_Nullable error))completion;
 
 /**
- * Gets the registered local model with the given name. Returns `nil` if the model was never
- * registered with this model manager.
+ * Gets the absolute file path on the device for the last downloaded model. Please do not use this
+ * API if you intend to use this model through `ModelInterpreter`.
  *
- * @param name Name of the local model.
- * @return The local model that was registered with the given name. Returns `nil` if the model was
- *     never registered with this model manager.
+ * @param remoteModel The downloaded model.
+ * @param completion Handler to call back returning the absolute file path of the downloaded model.
+ * This will return `nil` and will fail with the given `error` if the model is not yet downloaded on
+ *     the device or valid custom remote model is not provided.
  */
-- (nullable FIRLocalModelSource *)localModelSourceForModelName:(NSString *)name;
+- (void)getLatestModelFilePath:(FIRRemoteModel *)remoteModel
+                    completion:(void (^)(NSString *_Nullable filePath,
+                                         NSError *_Nullable error))completion;
 
 @end
 

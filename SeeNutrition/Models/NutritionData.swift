@@ -28,7 +28,7 @@ class NutritionData {
     var nf_potassium: Double
     var nf_p: Double
     
-    init(){
+    init() {
         food_name = ""
         brand_name = ""
         serving_unit = ""
