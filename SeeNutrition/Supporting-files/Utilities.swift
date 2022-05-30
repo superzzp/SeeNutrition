@@ -42,6 +42,14 @@ class Utilities {
         button.tintColor = UIColor.white
     }
     
+    static func styleResultTextFields(_ textField: UITextField) {
+        textField.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8)
+        textField.layer.cornerRadius = 5
+        textField.layer.borderWidth = 0
+        textField.textAlignment = .center
+        textField.font = UIFont.italicSystemFont(ofSize: 36)
+    }
+    
     static func styleHollowButton(_ button:UIButton) {
         
         // Hollow rounded corner style

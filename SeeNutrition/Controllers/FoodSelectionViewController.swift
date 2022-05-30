@@ -38,40 +38,12 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        // Deligate & protocal design pattern
         imgPickerController.delegate = self
-        initializeDesigns()
         if let userName = User.getCurrentFirstName() {
             showToast(message: "Welcome, \(userName)")
         } else {
             showToast(message: "Welcome, Local Test User")
-        }
-    }
-    
-    func initializeDesigns() {
-        DispatchQueue.main.async {
-     
-//
-//            foodDescriptionButtonA.layer.cornerRadius = 5
-//            foodDescriptionButtonA.layer.borderWidth = 1
-//            foodDescriptionButtonA.layer.borderColor = UIColor.white.cgColor
-//
-//            foodDescriptionButtonB.layer.cornerRadius = 5
-//            foodDescriptionButtonB.layer.borderWidth = 1
-//            foodDescriptionButtonB.layer.borderColor = UIColor.white.cgColor
-//
-//            foodDescriptionButtonC.layer.cornerRadius = 5
-//            foodDescriptionButtonC.layer.borderWidth = 1
-//            foodDescriptionButtonC.layer.borderColor = UIColor.white.cgColor
-
-//            foodDescriptionButtonA.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-//            foodDescriptionButtonB.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-//            foodDescriptionButtonC.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-    
-//            self.foodNameIndicatorText.isHidden = true
-//            self.foodDescriptionButtonA.isHidden = true
-//            self.foodDescriptionButtonB.isHidden = true
-//            self.foodDescriptionButtonC.isHidden = true
         }
     }
     
@@ -111,7 +83,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             // Labeled image
             for label in labels {
                 let labelText = label.text
-                let confidence = label.confidence!
+                let _ = label.confidence!
                 //append all names of classification results to a global list
                 self.classificationResults.append(labelText)
             }
@@ -156,14 +128,11 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
             
             self.navigationItem.title = "Food detected!"
             let noticeTextField: UITextField = UITextField()
+            
             noticeTextField.text = "Your food may be:"
             noticeTextField.frame = CGRect(x: self.view.bounds.size.width / 2 - 323 / 2, y: 140, width: 323, height: 52)
-            noticeTextField.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8)
-            noticeTextField.layer.cornerRadius = 5
-            noticeTextField.layer.borderWidth = 0
-            noticeTextField.textAlignment = .center
-            noticeTextField.font = UIFont.italicSystemFont(ofSize: 36)
             noticeTextField.tag = 200
+            Utilities.styleResultTextFields(noticeTextField)
             
             var btnIndex = 0
             for foodItem in self.foodItemResults {
@@ -173,10 +142,9 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
                 // Position Button
                 foodBtn.frame = CGRect(x: self.view.bounds.size.width / 2 - 268 / 2, y: 200 +  CGFloat(btnIndex) * 60, width: 268, height: 48)
                 foodBtn.alpha = 0.8
-                Utilities.styleFilledButton(foodBtn)
                 foodBtn.tag = 200
+                Utilities.styleFilledButton(foodBtn)
                 self.view.addSubview(foodBtn)
-                
                 btnIndex+=1
                 // List at most 6 food options
                 if (btnIndex > 5) {
@@ -319,22 +287,6 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         }
         
     }
-    
-//    @IBAction func foodDescriptionAPressed(_ sender: UIButton) {
-//        currentPickedFoodItem = foodDescriptionButtonA.currentTitle!
-//        getNutritionData()
-//    }
-//
-//
-//    @IBAction func foodDescriptionBPressed(_ sender: UIButton) {
-//        currentPickedFoodItem = foodDescriptionButtonB.currentTitle!
-//        getNutritionData()
-//    }
-//
-//    @IBAction func foodDescriptionCPressed(_ sender: UIButton) {
-//        currentPickedFoodItem = foodDescriptionButtonC.currentTitle!
-//        getNutritionData()
-//    }
 
     func getNutritionData() {
         let headers: HTTPHeaders = [
