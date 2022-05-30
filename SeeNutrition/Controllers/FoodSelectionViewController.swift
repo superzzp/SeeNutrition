@@ -21,17 +21,11 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var HotdogImageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var foodNameIndicatorText: UITextField!
-    @IBOutlet weak var foodDescriptionButtonA: UIButton!
-    @IBOutlet weak var foodDescriptionButtonB: UIButton!
-    @IBOutlet weak var foodDescriptionButtonC: UIButton!
 
     let imgPickerController = UIImagePickerController()
     var nutritionDataModel = NutritionData()
 
-    //ID, keys, url and default timezone for Nutritionix api
-    //  let nuixAppID = KeyValues.sharedInstance.string(forKey: .nuixAppId)
-    //  let nuixAppKeys = KeyValues.sharedInstance.string(forKey: .nuixAppKeys)
+    //ID, keys, url and default timezone for Nutritionix API
     let nuixAppID : String = Constants.NUIX.nuixAppId
     let nuixAppKeys : String = Constants.NUIX.nuixAppKeys
     let nuixURL : String =  Constants.NUIX.nuixURL
@@ -40,7 +34,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     var classificationResults : [String] = []
     var foodItemResults : [String] = []
     var currentPickedFoodItem : String = ""
-    
+    var resultSubView: UIView = UIView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,31 +49,30 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     }
     
     func initializeDesigns() {
-       
-        foodNameIndicatorText.layer.cornerRadius = 5
-        foodNameIndicatorText.layer.borderWidth = 0
-        
-        foodDescriptionButtonA.layer.cornerRadius = 5
-        foodDescriptionButtonA.layer.borderWidth = 1
-        foodDescriptionButtonA.layer.borderColor = UIColor.white.cgColor
-        
-        foodDescriptionButtonB.layer.cornerRadius = 5
-        foodDescriptionButtonB.layer.borderWidth = 1
-        foodDescriptionButtonB.layer.borderColor = UIColor.white.cgColor
-        
-        foodDescriptionButtonC.layer.cornerRadius = 5
-        foodDescriptionButtonC.layer.borderWidth = 1
-        foodDescriptionButtonC.layer.borderColor = UIColor.white.cgColor
-        
-        foodNameIndicatorText.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-        foodDescriptionButtonA.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-        foodDescriptionButtonB.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-        foodDescriptionButtonC.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
-        
-        foodNameIndicatorText.isHidden = true
-        foodDescriptionButtonA.isHidden = true
-        foodDescriptionButtonB.isHidden = true
-        foodDescriptionButtonC.isHidden = true
+        DispatchQueue.main.async {
+     
+//
+//            foodDescriptionButtonA.layer.cornerRadius = 5
+//            foodDescriptionButtonA.layer.borderWidth = 1
+//            foodDescriptionButtonA.layer.borderColor = UIColor.white.cgColor
+//
+//            foodDescriptionButtonB.layer.cornerRadius = 5
+//            foodDescriptionButtonB.layer.borderWidth = 1
+//            foodDescriptionButtonB.layer.borderColor = UIColor.white.cgColor
+//
+//            foodDescriptionButtonC.layer.cornerRadius = 5
+//            foodDescriptionButtonC.layer.borderWidth = 1
+//            foodDescriptionButtonC.layer.borderColor = UIColor.white.cgColor
+
+//            foodDescriptionButtonA.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+//            foodDescriptionButtonB.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+//            foodDescriptionButtonC.layer.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8).cgColor
+    
+//            self.foodNameIndicatorText.isHidden = true
+//            self.foodDescriptionButtonA.isHidden = true
+//            self.foodDescriptionButtonB.isHidden = true
+//            self.foodDescriptionButtonC.isHidden = true
+        }
     }
     
     //method to make UITextField height dynamic according to text length
@@ -108,29 +101,25 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
                 print("fail to classify the image!")
                 return
             }
-            // Labeled image
-            print("================classification results ===================")
-            for label in labels {
-                let labelText = label.text
-                let confidence = label.confidence!
-                print ("label: \(labelText), confidence: \(confidence)")
-                //append all names of classification results to a global list
-                self.classificationResults.append(labelText)
-            }
-            print("================end of classification results ====================")
             
-            //grand central dispatch
             //enable camera, folder button
             DispatchQueue.main.async {
                 self.cameraButton.isEnabled = true
                 self.folderButton.isEnabled = true
                 SVProgressHUD.dismiss()
             }
+            // Labeled image
+            for label in labels {
+                let labelText = label.text
+                let confidence = label.confidence!
+                //append all names of classification results to a global list
+                self.classificationResults.append(labelText)
+            }
             self.renderLabelResults();
         }
     }
     
-    //check if a array of strings contain food item
+    // check if a array of strings contain food item
     func checkFood(array: [String]) -> Bool{
         let ln = LabelName();
         for item in array {
@@ -144,7 +133,7 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     }
     
     func renderLabelResults() {
-        //detect food product
+        // detect food product
         if (checkFood(array: self.classificationResults)) {
             self.setUIWhenFoodDetected()
         }else{
@@ -154,42 +143,58 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     }
     
     func setUIWhenFoodDetected() {
+        
         self.assignNonGenericFoodDescription(descriptionArray: self.classificationResults)
-        //food detected but no suitable text description, treat as food not detected
+        // food detected but no suitable text description, treat as food not detected
         if self.foodItemResults.count <= 0 {
             self.setUIWhenFoodNotDetected()
         }
-        print(self.foodItemResults)
-        //grand central dispatch
+        // grand central dispatch
         DispatchQueue.main.async {
+            // clear all previous elements from result subview
+            self.resultSubView.subviews.forEach({ $0.removeFromSuperview() })
+            
             self.navigationItem.title = "Food detected!"
-            self.navigationController?.navigationBar.barTintColor = UIColor.init(displayP3Red: 60.0/255, green:179.0/255 , blue: 113.0/255, alpha: 1)
-            self.navigationController?.navigationBar.isTranslucent = false
-            self.HotdogImageView.image = UIImage(named: "correct")
-            self.foodNameIndicatorText.isHidden = false
-
-            if self.foodItemResults.count == 1 {
-                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                self.foodDescriptionButtonA.isHidden = false
+            let noticeTextField: UITextField = UITextField()
+            noticeTextField.text = "Your food may be:"
+            noticeTextField.frame = CGRect(x: self.view.bounds.size.width / 2 - 323 / 2, y: 140, width: 323, height: 52)
+            noticeTextField.backgroundColor = UIColor(red: 0, green: 253.0/255.0, blue: 1, alpha: 0.8)
+            noticeTextField.layer.cornerRadius = 5
+            noticeTextField.layer.borderWidth = 0
+            noticeTextField.textAlignment = .center
+            noticeTextField.font = UIFont.italicSystemFont(ofSize: 36)
+            noticeTextField.tag = 200
+            
+            var btnIndex = 0
+            for foodItem in self.foodItemResults {
+                let foodBtn = UIButton(type: .system)
+                foodBtn.addTarget(self, action: #selector(self.buttonAction(_:)), for: .touchUpInside)
+                foodBtn.setTitle(foodItem, for: .normal)
+                // Position Button
+                foodBtn.frame = CGRect(x: self.view.bounds.size.width / 2 - 268 / 2, y: 200 +  CGFloat(btnIndex) * 60, width: 268, height: 48)
+                foodBtn.alpha = 0.8
+                Utilities.styleFilledButton(foodBtn)
+                foodBtn.tag = 200
+                self.view.addSubview(foodBtn)
+                
+                btnIndex+=1
+                // List at most 6 food options
+                if (btnIndex > 5) {
+                    break
+                }
             }
-
-            if self.foodItemResults.count == 2 {
-                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
-                self.foodDescriptionButtonA.isHidden = false
-                self.foodDescriptionButtonB.isHidden = false
-            }
-
-            if self.foodItemResults.count > 2 {
-                self.foodDescriptionButtonA.setTitle(self.foodItemResults[0], for: UIControl.State.normal)
-                self.foodDescriptionButtonB.setTitle(self.foodItemResults[1], for: UIControl.State.normal)
-                self.foodDescriptionButtonC.setTitle(self.foodItemResults[2], for: UIControl.State.normal)
-                self.foodDescriptionButtonA.isHidden = false
-                self.foodDescriptionButtonB.isHidden = false
-                self.foodDescriptionButtonC.isHidden = false
-            }
+            self.view.addSubview(noticeTextField)
         }
     }
+    
+    @objc func buttonAction(_ sender:UIButton!)
+        {
+            if let label = sender.titleLabel {
+                print(label.text!);
+                currentPickedFoodItem = label.text!
+                getNutritionData()
+            }
+        }
     
     func setUIWhenFoodNotDetected() {
         //grand central dispatch
@@ -203,17 +208,20 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
     
     @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            SVProgressHUD.show()
-            self.cameraButton.isEnabled = false
-            self.folderButton.isEnabled = false
-            self.foodNameIndicatorText.isHidden = true
-            self.foodDescriptionButtonA.isHidden = true
-            self.foodDescriptionButtonB.isHidden = true
-            self.foodDescriptionButtonC.isHidden = true
+            DispatchQueue.main.async {
+                SVProgressHUD.show()
+                self.cameraButton.isEnabled = false
+                self.folderButton.isEnabled = false
+                self.imageView.image = image
+            }
             //clear the results array everytime users pick an new image
             self.classificationResults = []
             self.foodItemResults = []
-            imageView.image = image
+            
+            //remove previously added result views (if exist)
+            let views = self.view.getViewsByTag(tag: 200)
+            views.forEach { view in view?.removeFromSuperview()}
+            
             //dismiss the imgPickerController after presented
             imgPickerController.dismiss(animated: true, completion: nil)
             //Run google image recognition
@@ -312,21 +320,21 @@ class FoodSelectionViewController: UIViewController, UIImagePickerControllerDele
         
     }
     
-    @IBAction func foodDescriptionAPressed(_ sender: UIButton) {
-        currentPickedFoodItem = foodDescriptionButtonA.currentTitle!
-        getNutritionData()
-    }
-
-
-    @IBAction func foodDescriptionBPressed(_ sender: UIButton) {
-        currentPickedFoodItem = foodDescriptionButtonB.currentTitle!
-        getNutritionData()
-    }
-
-    @IBAction func foodDescriptionCPressed(_ sender: UIButton) {
-        currentPickedFoodItem = foodDescriptionButtonC.currentTitle!
-        getNutritionData()
-    }
+//    @IBAction func foodDescriptionAPressed(_ sender: UIButton) {
+//        currentPickedFoodItem = foodDescriptionButtonA.currentTitle!
+//        getNutritionData()
+//    }
+//
+//
+//    @IBAction func foodDescriptionBPressed(_ sender: UIButton) {
+//        currentPickedFoodItem = foodDescriptionButtonB.currentTitle!
+//        getNutritionData()
+//    }
+//
+//    @IBAction func foodDescriptionCPressed(_ sender: UIButton) {
+//        currentPickedFoodItem = foodDescriptionButtonC.currentTitle!
+//        getNutritionData()
+//    }
 
     func getNutritionData() {
         let headers: HTTPHeaders = [

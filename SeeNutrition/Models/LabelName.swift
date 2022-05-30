@@ -10,6 +10,6 @@ struct LabelName{
     
     var genericFoodNames : [String] = ["food", "nutrition", "dish", "restaurant", "cuisine", "recipe", "produce", "ingredient", "vegetable", "cook"];
     
-    var genericNonFoodNames : [String] = ["color", "green", "blue", "red", "orange", "yellow", "plant", "goods", "building"];
+    var genericNonFoodNames : [String] = ["color", "green", "blue", "red", "orange", "yellow", "plant", "goods", "building", "table", "plate"];
 }
 
